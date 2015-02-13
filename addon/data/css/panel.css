@@ -1,0 +1,7 @@
+body {
+    padding: 5pt;
+}
+
+img, textarea {
+    max-width: 100%;
+}
