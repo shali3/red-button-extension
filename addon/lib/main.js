@@ -29,7 +29,7 @@ function handleChange(state) {
             contentURL: self.data.url("panel.html"),
             contentScriptFile: [self.data.url("js/jquery-2.1.3.min.js"), self.data.url("js/panel.js")],
             contentStyleFile: [self.data.url("css/panel.css")],
-            height: 400,
+            height: 420,
             onHide: handleHide
         });
 
@@ -39,7 +39,11 @@ function handleChange(state) {
         panel.port.emit('init', {
             screenshot: imageDataUri,
             commentPlaceholder: _('comment_field_placeholder'),
-            passcodePlaceholder:_('passcode_placeholder')
+            passcodePlaceholder: _('passcode_placeholder'),
+            closeText: _('close_button')
+        });
+        panel.port.on("close", function () {
+            handleHide();
         });
 
     }

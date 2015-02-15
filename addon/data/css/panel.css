@@ -9,3 +9,13 @@ img, textarea {
 input {
     width: 100%;
 }
+
+button, h2, textarea {
+    margin-top: 5pt;
+}
+
+button.close {
+    margin: 0;
+    position: absolute;
+    display: block;
+}
