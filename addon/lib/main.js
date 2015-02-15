@@ -17,14 +17,7 @@ var button = buttons.ToggleButton({
     onChange: handleChange
 });
 
-var panel = panels.Panel({
-        contentURL: self.data.url("panel.html"),
-        contentScriptFile: [self.data.url("js/jquery-2.1.3.min.js"), self.data.url("js/panel.js")],
-        contentStyleFile: [self.data.url("css/panel.css")],
-        height: 400,
-        onHide: handleHide
-    })
-    ;
+var panel;
 
 function handleChange(state) {
     if (state.checked) {
@@ -32,12 +25,21 @@ function handleChange(state) {
         var imageDataUri = screenshots.captureTab();
         //tabs.open(imageDataUri);
 
+        panel = panels.Panel({
+            contentURL: self.data.url("panel.html"),
+            contentScriptFile: [self.data.url("js/jquery-2.1.3.min.js"), self.data.url("js/panel.js")],
+            contentStyleFile: [self.data.url("css/panel.css")],
+            height: 400,
+            onHide: handleHide
+        });
+
         panel.show({
             position: button
         });
         panel.port.emit('init', {
             screenshot: imageDataUri,
-            commentPlaceholder: _('comment_field_placeholder')
+            commentPlaceholder: _('comment_field_placeholder'),
+            passcodePlaceholder:_('passcode_placeholder')
         });
 
     }
@@ -45,4 +47,5 @@ function handleChange(state) {
 
 function handleHide() {
     button.state('window', {checked: false});
+    panel.destroy();
 }
