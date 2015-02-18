@@ -1,4 +1,8 @@
 var screen_img;
+function sendHeight() {
+    self.port.emit('heightChanged', $('.main').height());
+}
+
 
 self.port.on('init', function (data) {
     screen_img = data.screenshot;
@@ -6,6 +10,7 @@ self.port.on('init', function (data) {
     $("#reportComment").attr('placeholder', data.commentPlaceholder);
     $("#passcodeText").attr('placeholder', data.passcodePlaceholder);
     $('.close').attr('title', data.closeText);
+    sendHeight();
 });
 
 $(function () {
@@ -31,5 +36,9 @@ $(function () {
     $(".close").click(function (e) {
         self.port.emit('close', null);
     });
+
+    $('#screenshot').load(sendHeight);
+
+    sendHeight();
 
 });

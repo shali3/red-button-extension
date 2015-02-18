@@ -1,9 +1,11 @@
-body {
-    padding: 5pt;
+body{
+    overflow-x: hidden;
 }
-
 img, textarea {
     max-width: 100%;
+}
+textarea {
+    resize: none;
 }
 
 input {
@@ -18,4 +20,9 @@ button.close {
     margin: 0;
     position: absolute;
     display: block;
+}
+
+.main {
+    margin: 0;
+    padding: 0 5pt;
 }

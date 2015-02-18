@@ -25,11 +25,13 @@ function handleChange(state) {
         var imageDataUri = screenshots.captureTab();
         //tabs.open(imageDataUri);
 
+        const panelWidth = 300;
         panel = panels.Panel({
             contentURL: self.data.url("panel.html"),
             contentScriptFile: [self.data.url("js/jquery-2.1.3.min.js"), self.data.url("js/panel.js")],
             contentStyleFile: [self.data.url("css/panel.css")],
-            height: 420,
+            width: panelWidth,
+            height: 400,
             onHide: handleHide
         });
 
@@ -42,8 +44,12 @@ function handleChange(state) {
             passcodePlaceholder: _('passcode_placeholder'),
             closeText: _('close_button')
         });
-        panel.port.on("close", function () {
+        panel.port.on('close', function () {
             handleHide();
+        });
+        panel.port.on('heightChanged', function (height) {
+            console.log(height);
+            panel.resize(panelWidth, height + 20);
         });
 
     }
