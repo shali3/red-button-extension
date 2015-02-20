@@ -23,7 +23,7 @@ function handleChange(state) {
     if (state.checked) {
 
         var imageDataUri = screenshots.captureTab();
-        //tabs.open(imageDataUri);
+        var tabUri = screenshots.getCurrentURI();
 
         const panelWidth = 300;
         panel = panels.Panel({
@@ -39,6 +39,7 @@ function handleChange(state) {
         });
         panel.port.emit('init', {
             screenshot: imageDataUri,
+            uri: tabUri,
             strings: {
                 comment_field_placeholder: _('comment_field_placeholder'),
                 passcode_placeholder: _('passcode_placeholder'),
