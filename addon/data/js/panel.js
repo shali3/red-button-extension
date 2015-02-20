@@ -10,18 +10,29 @@ self.port.on('init', function (data) {
     sendHeight();
 });
 
+self.port.on('postReportSuccess', function (data) {
+    $('form').hide();
+    $('#successMessage').show();
+});
+
+self.port.on('postReportError', function () {
+    $(".form-control").removeAttr("disabled");
+    $('#submitButton').text(init_data.strings.send_button);
+});
+
 function onSubmit(e) {
     if (validateForm()) {
         $(".form-control").attr("disabled", true);
         $('#submitButton').text(init_data.strings.sending);
 
-        //TODO: Send to background
-        //{
-        //    url: tab.url,
-        //        comment: $('textarea').val(),
-        //    base64PNG: init_data.screenshot,
-        //    code: $("#passcodeText").val()
-        //}
+        var payload = {
+            uri: init_data.url,
+            comment: $('textarea').val(),
+            screenCaptureBase64png: init_data.screenshot,
+            code: $("#passcodeText").val()
+        };
+
+        self.port.emit('postReport', payload);
     }
     else {
         $(".form-control").removeAttr("disabled");

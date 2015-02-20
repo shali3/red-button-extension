@@ -4,6 +4,7 @@ var self = require("sdk/self");
 var _ = require("sdk/l10n").get;
 
 var screenshots = require("./screenshot");
+var service = require("./service");
 
 
 var button = buttons.ToggleButton({
@@ -39,7 +40,7 @@ function handleChange(state) {
         });
         panel.port.emit('init', {
             screenshot: imageDataUri,
-            uri: tabUri,
+            url: tabUri,
             strings: {
                 comment_field_placeholder: _('comment_field_placeholder'),
                 passcode_placeholder: _('passcode_placeholder'),
@@ -56,6 +57,13 @@ function handleChange(state) {
             panel.resize(panelWidth, height + 20);
         });
 
+        panel.port.on('postReport', function (data) {
+            service.postReport(data, function (response) {
+                panel.port.emit('postReportSuccess', response);
+            }, function (error) {
+                panel.port.emit('postReportError', error);
+            });
+        });
     }
 }
 
