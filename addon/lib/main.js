@@ -53,7 +53,6 @@ function handleChange(state) {
             handleHide();
         });
         panel.port.on('heightChanged', function (height) {
-            console.log(height);
             panel.resize(panelWidth, height + 20);
         });
 
