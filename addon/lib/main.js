@@ -29,7 +29,6 @@ function handleChange(state) {
         panel = panels.Panel({
             contentURL: self.data.url("panel.html"),
             contentScriptFile: [self.data.url("js/jquery-2.1.3.min.js"), self.data.url("js/panel.js")],
-            contentStyleFile: [self.data.url("css/panel.css")],
             width: panelWidth,
             height: 400,
             onHide: handleHide
@@ -42,7 +41,8 @@ function handleChange(state) {
             screenshot: imageDataUri,
             commentPlaceholder: _('comment_field_placeholder'),
             passcodePlaceholder: _('passcode_placeholder'),
-            closeText: _('close_button')
+            closeText: _('close_button'),
+            sendingText: _('sending')
         });
         panel.port.on('close', function () {
             handleHide();
