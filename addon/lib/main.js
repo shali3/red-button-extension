@@ -39,10 +39,13 @@ function handleChange(state) {
         });
         panel.port.emit('init', {
             screenshot: imageDataUri,
-            commentPlaceholder: _('comment_field_placeholder'),
-            passcodePlaceholder: _('passcode_placeholder'),
-            closeText: _('close_button'),
-            sendingText: _('sending')
+            strings: {
+                comment_field_placeholder: _('comment_field_placeholder'),
+                passcode_placeholder: _('passcode_placeholder'),
+                close_button: _('close_button'),
+                sending: _('sending'),
+                send_button: _('send_button')
+            }
         });
         panel.port.on('close', function () {
             handleHide();

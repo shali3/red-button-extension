@@ -1,20 +1,19 @@
-var screen_img;
 var init_data;
 
 
 self.port.on('init', function (data) {
     init_data = data;
     $('#screenshot').attr('src', data.screenshot);
-    $("#reportComment").attr('placeholder', data.commentPlaceholder);
-    $("#passcodeText").attr('placeholder', data.passcodePlaceholder);
-    $('.close').attr('title', data.closeText);
+    $("#reportComment").attr('placeholder', data.strings.comment_field_placeholder);
+    $("#passcodeText").attr('placeholder', data.strings.passcode_placeholder);
+    $('.close').attr('title', data.strings.close_button);
     sendHeight();
 });
 
 function onSubmit(e) {
     if (validateForm()) {
         $(".form-control").attr("disabled", true);
-        $('#submitButton').text(init_data.sendingText);
+        $('#submitButton').text(init_data.strings.sending);
 
         //TODO: Send to background
         //{
