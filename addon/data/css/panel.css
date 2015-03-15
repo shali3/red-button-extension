@@ -30,3 +30,15 @@ button.close {
     position: absolute;
     display: block;
 }
+
+.error-message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    height: 3em;
+    line-height: 1.5em;
+    background-color: #D9534F;
+    color: #ffffff;
+    overflow: hidden;
+}

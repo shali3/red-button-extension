@@ -29,7 +29,9 @@ function handleChange(state) {
         const panelWidth = 300;
         panel = panels.Panel({
             contentURL: self.data.url("panel.html"),
-            contentScriptFile: [self.data.url("js/jquery-2.1.3.min.js"), self.data.url("js/panel.js")],
+            contentScriptFile: [
+                self.data.url("js/jquery-2.1.3.min.js"),
+                self.data.url("js/panel.js")],
             width: panelWidth,
             height: 400,
             onHide: handleHide

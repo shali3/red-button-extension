@@ -1,5 +1,5 @@
 var init_data;
-
+var errorFadeOut;
 
 self.port.on('init', function (data) {
     init_data = data;
@@ -15,9 +15,18 @@ self.port.on('postReportSuccess', function (data) {
     $('#successMessage').show();
 });
 
-self.port.on('postReportError', function () {
+function showError(error) {
+    $(".error-message").text(error);
+    $(".error-message").fadeIn('fast');
+    clearTimeout(errorFadeOut);
+    errorFadeOut = setTimeout(function () {
+        $(".error-message").fadeOut('fast');
+    }, 5000);
+}
+self.port.on('postReportError', function (error) {
     $(".form-control").removeAttr("disabled");
     $('#submitButton').text(init_data.strings.send_button);
+    showError(error);
 });
 
 function onSubmit(e) {
