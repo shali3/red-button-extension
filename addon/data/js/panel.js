@@ -59,6 +59,32 @@ function onSubmit(e) {
 
     e.preventDefault();
 }
+function renderOldReports() {
+    if (init_data.reports && init_data.reports.length > 0) {
+        var template = $('#template').html();
+        Mustache.parse(template);   // optional, speeds up future uses
+        var rendered = Mustache.render(template, init_data);
+        $('table >tbody').html(rendered);
+    }
+    else {
+        $('#noReports').show();
+        $('table').hide();
+    }
+}
+
+function onSwitchToViewReports() {
+    renderOldReports();
+    $('#viewReportsButton').hide();
+    $('#reportButton').show();
+    $('.report-tab').hide();
+    $('.old-reports-tab').show();
+}
+function onSwitchToReport() {
+    $('#viewReportsButton').show();
+    $('#reportButton').hide();
+    $('.report-tab').show();
+    $('.old-reports-tab').hide();
+}
 $(function () {
     // on document ready
     $("#passcodeText").keydown(onCodeKeyDown);
@@ -69,6 +95,8 @@ $(function () {
 
     $('#screenshot').load(sendHeight);
     $('#submitButton').click(onSubmit);
+    $('#viewReportsButton').click(onSwitchToViewReports);
+    $('#reportButton').click(onSwitchToReport);
     sendHeight();
 });
 

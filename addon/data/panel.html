@@ -10,34 +10,62 @@
 <div class="error-message" style="display: none;">This is an Error!</div>
 
 <div class="main">
+    <button id="reportButton" type="button" data-l10n-id="report_now" style="display: none"
+            class="btn btn-danger btn-block">Report now
+    </button>
+    <button id="viewReportsButton" type="button" data-l10n-id="view_old_reports" class="btn btn-default btn-block">Old
+        view old reports
+    </button>
     <button type="button" class="close pull-left" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h2 data-l10n-id="product_name" class="text-center">Form Title</h2>
 
-    <form>
-        <div class="form-group">
-            <img id="screenshot" alt="" src="#"/>
-        </div>
-        <div class="form-group">
-            <textarea id="reportComment" class="form-control" rows="3"></textarea>
-        </div>
-        <div id="passcodeTextGroup" class="form-group">
-            <label id="passcodeLabel" class="control-label" data-l10n-id="passcode_label" for="passcodeText">Good
-                label</label>
-            <label id="passcodeValidationLabel" class="control-label" style="display: none;"
-                   data-l10n-id="passcode_label_validation" for="passcodeText">Bad label</label>
-            <input id="passcodeText" class="form-control" type="text">
-        </div>
-        <button id="submitButton" data-l10n-id="send_button" type="submit"
-                class="btn btn-success btn-block form-control">Submit
-            Button
-        </button>
-    </form>
-    <h4 id="successMessage" data-l10n-id="success_message" style="display: none">
-        Great Success!
-    </h4>
-    <h5 id="redirectMessage" data-l10n-id="redirect_message" style="display: none">
-        You will be redirected
-    </h5>
+    <div class="report-tab">
+        <form>
+            <div class="form-group">
+                <img id="screenshot" alt="" src="#"/>
+            </div>
+            <div class="form-group">
+                <textarea id="reportComment" class="form-control" rows="3"></textarea>
+            </div>
+            <div id="passcodeTextGroup" class="form-group">
+                <label id="passcodeLabel" class="control-label" data-l10n-id="passcode_label" for="passcodeText">Good
+                    label</label>
+                <label id="passcodeValidationLabel" class="control-label" style="display: none;"
+                       data-l10n-id="passcode_label_validation" for="passcodeText">Bad label</label>
+                <input id="passcodeText" class="form-control" type="text">
+            </div>
+            <button id="submitButton" data-l10n-id="send_button" type="submit"
+                    class="btn btn-success btn-block form-control">Submit
+                Button
+            </button>
+        </form>
+        <h4 id="successMessage" data-l10n-id="success_message" style="display: none">
+            Great Success!
+        </h4>
+        <h5 id="redirectMessage" data-l10n-id="redirect_message" style="display: none">
+            You will be redirected
+        </h5>
+    </div>
+    <div class="old-reports-tab" style="display: none;">
+        <a href="http://redbutton.org.il/redbuttonstatus/" target="_blank" data-l10n-id="report_status_link"></a>
+        <script id="template" type="x-tmpl-mustache">
+            {{#reports}}<tr><td>{{reportID}}</td><td>{{reportCode}}</td></tr>{{/reports}}
+
+        </script>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th data-l10n-id="report_id_header">Report #</th>
+                <th data-l10n-id="report_code_header">Code</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <h4 id="noReports" data-l10n-id="no_reports_message" style="display: none">
+            No Reports
+        </h4>
+    </div>
 </div>
 </body>
 </html>

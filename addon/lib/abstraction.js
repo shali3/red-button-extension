@@ -26,3 +26,10 @@ exports.canReport = function () {
     else
         return true;
 };
+
+exports.getReports = function () {
+    var reports = ss.storage.reports;
+    if (!reports)
+        reports = [];
+    return reports;
+};

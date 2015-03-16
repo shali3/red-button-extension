@@ -2,6 +2,7 @@ var buttons = require('sdk/ui/button/toggle');
 var panels = require("sdk/panel");
 var self = require("sdk/self");
 var _ = require("sdk/l10n").get;
+var abstraction = require("./abstraction");
 var tabs = require("sdk/tabs");
 var { setTimeout, clearTimeout } = require("sdk/timers");
 
@@ -33,6 +34,7 @@ function handleChange(state) {
             contentURL: self.data.url("panel.html"),
             contentScriptFile: [
                 self.data.url("js/jquery-2.1.3.min.js"),
+                self.data.url("js/mustache.min.js"),
                 self.data.url("js/panel.js")],
             width: panelWidth,
             height: 400,
@@ -42,6 +44,15 @@ function handleChange(state) {
         panel.show({
             position: button
         });
+        var reports = abstraction.getReports();
+
+        //replace empty codes with message.
+        reports.forEach(function (report) {
+            if (!report.reportCode) {
+                report.reportCode = _('no_report_code');
+            }
+        });
+
         panel.port.emit('init', {
             screenshot: imageDataUri,
             url: tabUri,
@@ -51,7 +62,8 @@ function handleChange(state) {
                 close_button: _('close_button'),
                 sending: _('sending'),
                 send_button: _('send_button')
-            }
+            },
+            reports: reports
         });
         panel.port.on('close', function () {
             handleHide();
