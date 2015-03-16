@@ -1,5 +1,6 @@
 var init_data;
 var errorFadeOut;
+var report;
 
 self.port.on('init', function (data) {
     init_data = data;
@@ -17,6 +18,9 @@ function hideError() {
 self.port.on('postReportSuccess', function (ignored) {
     $('form').hide();
     $('#successMessage').show();
+    if (report.code) {
+        $('#redirectMessage').show();
+    }
 });
 
 function showError(error) {
@@ -40,14 +44,14 @@ function onSubmit(e) {
         $(".form-control").attr("disabled", true);
         $('#submitButton').text(init_data.strings.sending);
 
-        var payload = {
+        report = {
             uri: init_data.url,
             comment: $('textarea').val(),
             screenCaptureBase64png: init_data.screenshot,
             code: $("#passcodeText").val()
         };
 
-        self.port.emit('postReport', payload);
+        self.port.emit('postReport', report);
     }
     else {
         $(".form-control").removeAttr("disabled");

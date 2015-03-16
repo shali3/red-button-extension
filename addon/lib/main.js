@@ -2,6 +2,8 @@ var buttons = require('sdk/ui/button/toggle');
 var panels = require("sdk/panel");
 var self = require("sdk/self");
 var _ = require("sdk/l10n").get;
+var tabs = require("sdk/tabs");
+var { setTimeout, clearTimeout } = require("sdk/timers");
 
 var screenshots = require("./screenshot");
 var service = require("./service");
@@ -58,9 +60,14 @@ function handleChange(state) {
             panel.resize(panelWidth, height + 20);
         });
 
-        panel.port.on('postReport', function (data) {
-            service.postReport(data, function (response) {
+        panel.port.on('postReport', function (report) {
+            service.postReport(report, function (response) {
                 panel.port.emit('postReportSuccess', response);
+                if (report.code) {
+                    setTimeout(function () {
+                        tabs.open({url: 'http://redbutton.org.il/casenumberintro?id=' + response + '&code=' + report.code + ''});
+                    }, 3000);
+                }
             }, function (error) {
                 panel.port.emit('postReportError', error);
             });

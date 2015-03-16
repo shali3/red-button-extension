@@ -9,10 +9,16 @@ exports.postReport = function (data, success, failure) {
             //url: data.comment.length > 0 ? "http://localhost:8000/test1" : "http://localhost:8000/test2",
             content: data,
             onComplete: function (response) {
-                console.log('Got Response ' + response.status + ' text: ' + response.text);
+                var reportId = response.text;
+                //trim redundant "
+                if (reportId[0] == '"' && reportId[reportId.length - 1] == '"') {
+                    reportId = reportId.slice(1, reportId.length - 1);
+                }
+
+                console.log('Got Response ' + response.status + ' text: ' + reportId);
                 if (response.status == 200) {
-                    abstraction.saveReport(response.text, data.code);
-                    success(response.text, data.code);
+                    abstraction.saveReport(reportId, data.code);
+                    success(reportId, data.code);
                 }
                 else {
                     failure(response.status);
