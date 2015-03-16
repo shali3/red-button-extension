@@ -14,14 +14,15 @@ function hideError() {
     clearTimeout(errorFadeOut);
     $(".error-message").hide();
 }
-self.port.on('postReportSuccess', function (data) {
+self.port.on('postReportSuccess', function (ignored) {
     $('form').hide();
     $('#successMessage').show();
 });
 
 function showError(error) {
-    $(".error-message").text(error);
-    $(".error-message").fadeIn('fast');
+    var $error = $(".error-message");
+    $error.text(error);
+    $error.fadeIn('fast');
     clearTimeout(errorFadeOut);
     errorFadeOut = setTimeout(function () {
         $(".error-message").fadeOut('fast');
