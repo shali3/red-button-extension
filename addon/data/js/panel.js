@@ -10,6 +10,10 @@ self.port.on('init', function (data) {
     sendHeight();
 });
 
+function hideError() {
+    clearTimeout(errorFadeOut);
+    $(".error-message").hide();
+}
 self.port.on('postReportSuccess', function (data) {
     $('form').hide();
     $('#successMessage').show();
@@ -30,6 +34,7 @@ self.port.on('postReportError', function (error) {
 });
 
 function onSubmit(e) {
+    hideError();
     if (validateForm()) {
         $(".form-control").attr("disabled", true);
         $('#submitButton').text(init_data.strings.sending);
