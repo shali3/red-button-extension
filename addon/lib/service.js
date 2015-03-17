@@ -21,7 +21,8 @@ exports.postReport = function (data, success, failure) {
                     success(reportId, data.code);
                 }
                 else {
-                    failure(response.status);
+                    var text = response.text ? response.status + ':' + response.text : response.status;
+                    failure(text);
                 }
             }
         }).post();
