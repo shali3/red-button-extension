@@ -61,10 +61,10 @@ function onSubmit(e) {
 }
 function renderOldReports() {
     if (init_data.reports && init_data.reports.length > 0) {
-        var template = $('#template').html();
+        var template = "{{#reports}}<tr><td>{{reportID}}</td><td>{{reportCode}}</td></tr>{{/reports}}";
         Mustache.parse(template);   // optional, speeds up future uses
         var rendered = Mustache.render(template, init_data);
-        $('table >tbody').html(rendered);
+        $('#placeholder').html(rendered);
     }
     else {
         $('#noReports').show();
