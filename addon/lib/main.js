@@ -46,13 +46,6 @@ function handleChange(state) {
         });
         var reports = abstraction.getReports();
 
-        //replace empty codes with message.
-        reports.forEach(function (report) {
-            if (!report.reportCode) {
-                report.reportCode = _('no_report_code');
-            }
-        });
-
         panel.port.emit('init', {
             screenshot: imageDataUri,
             url: tabUri,
@@ -61,7 +54,8 @@ function handleChange(state) {
                 passcode_placeholder: _('passcode_placeholder'),
                 close_button: _('close_button'),
                 sending: _('sending'),
-                send_button: _('send_button')
+                send_button: _('send_button'),
+                no_report_code: _('no_report_code')
             },
             reports: reports
         });
@@ -84,6 +78,20 @@ function handleChange(state) {
                 panel.port.emit('postReportError', error);
             });
         });
+        panel.port.on('viewReport', function (report) {
+            tabs.open({
+                url: "http://redbutton.org.il/redbuttonstatus/",
+                onReady: function (tab) {
+                    tab.attach({
+                        contentScriptFile: [
+                            self.data.url("js/jquery-2.1.3.min.js"),
+                            self.data.url("js/content-script.js")
+                        ],
+                        contentScriptOptions: report
+                    });
+                }
+            });
+        })
     }
 }
 

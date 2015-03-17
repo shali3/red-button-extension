@@ -59,12 +59,31 @@ function onSubmit(e) {
 
     e.preventDefault();
 }
+
+function onViewReport(e) {
+    var report;
+    //find the report in the reports array
+    for (var i = 0, len = init_data.reports.length; i < len; i++) {
+        if (init_data.reports[i].reportID === e.target.text) {
+            report = init_data.reports[i];
+            break;
+        }
+    }
+
+    //send it to background page.
+    self.port.emit('viewReport', report);
+    e.preventDefault();
+}
+
 function renderOldReports() {
     if (init_data.reports && init_data.reports.length > 0) {
-        var template = "{{#reports}}<tr><td>{{reportID}}</td><td>{{reportCode}}</td></tr>{{/reports}}";
+        var template = "{{#reports}}<tr><td><a href='#' class='viewReport'>{{reportID}}</a></td><td>{{reportCode}}{{^reportCode}}{{strings.no_report_code}}{{/reportCode}}</td></tr>{{/reports}}";
         Mustache.parse(template);   // optional, speeds up future uses
         var rendered = Mustache.render(template, init_data);
         $('#placeholder').html(rendered);
+
+        //register the report links
+        $('.viewReport').click(onViewReport);
     }
     else {
         $('#noReports').show();

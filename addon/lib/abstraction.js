@@ -31,5 +31,12 @@ exports.getReports = function () {
     var reports = ss.storage.reports;
     if (!reports)
         reports = [];
+
+    // Clean the code field if it's not a number
+    reports.forEach(function (report) {
+        if (isNaN(report.reportCode)) {
+            report.reportCode = null;
+        }
+    });
     return reports;
 };
