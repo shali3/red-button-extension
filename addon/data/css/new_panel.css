@@ -1,0 +1,22 @@
+.header {
+    background-color: red;
+    color: white;
+    line-height: 2em;
+    height: 2em;
+}
+
+.header .close {
+    color: white;
+    opacity: 1;
+}
+
+.tabs-menu [class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eee;
+    background-color: rgba(86, 61, 124, .15);
+}
+
+.tabs-menu .active{
+    background-color: #002933;
+}
