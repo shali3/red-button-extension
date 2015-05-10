@@ -25,7 +25,11 @@
                 close: 'Close',
                 reportTab: 'Report',
                 myReports: 'My Reports',
-                heroes: 'Heroes'
+                heroes: 'Heroes',
+                screeshotSuccess: 'The screenshot has been captured successfully',
+                commentPlaceholder: 'You can add a comment to the report',
+                send: 'Send'
+
             };
         });
 })();

@@ -1,8 +1,16 @@
 <div class="report-form" ng-controller="reportController">
     <!--<div> {{test}}</div>-->
+    <div class="capture-message">{{text.screeshotSuccess}}</div>
+
     <div class="screenshot">
         <img ng-src="{{data.screenshot}}" alt="Screenshot">
     </div>
+    <form>
+        <div class="comment">
+            <textarea class="form-control" type="text" placeholder="{{text.commentPlaceholder}}"></textarea>
+        </div>
+        <input class="submit" type="submit" value="{{text.send}}">
+    </form>
     <div class="social-btns">
         <i class="fa fa-home"></i>
         <i class="fa fa-youtube"></i>

@@ -1,6 +1,29 @@
 $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
+@font-face {
+  font-family: "Almoni DL AAA";
+  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Almoni DL AAA";
+  font-weight: bold;
+  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Almoni DL AAA";
+  font-weight: 900;
+  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Almoni DL AAA";
+  font-weight: 100;
+  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-light.otf") format("opentype");
+}
+
 .header {
   padding: 5px;
   background-color: $header-red;
@@ -57,13 +80,36 @@ $image-background: darken(white, 20%);
 }
 
 .report-form {
+  text-align: center;
+  .capture-message {
+    margin-top: 20px;
+  }
   .screenshot {
     margin: 20px 0;
-    text-align: center;
     background-color: $image-background;
     img {
       max-height: 150px;
       max-width: 100%;
     }
   }
+  .comment {
+    padding: 5px;
+    textarea {
+      min-height: 80px;
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .submit {
+    $size: 100px;
+    border: none;
+    background: transparent url("../images/main-button.png") no-repeat;
+    background-size: $size $size;
+    width: $size;
+    height: $size;
+    color: #ffffff;
+    margin: 10px;
+  }
+
 }

@@ -35,7 +35,7 @@ function handleChange(state) {
                 self.data.url("js/page-script.js")
             ],
             width: panelWidth,
-            height: 400,
+            height: 600,
             onHide: handleHide
         });
 
