@@ -119,3 +119,6 @@ chrome/
 
 bower_components
 addon/data/js/ext
+
+addon/data/css/style.css
+addon/data/css/style.css.map
