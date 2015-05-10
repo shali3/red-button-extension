@@ -9,7 +9,6 @@ var { setTimeout, clearTimeout } = require("sdk/timers");
 var screenshots = require("./screenshot");
 var service = require("./service");
 
-
 var button = buttons.ToggleButton({
     id: "red-button",
     label: _("product_name"),
