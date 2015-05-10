@@ -1,0 +1,43 @@
+$active-tab-background: #002832;
+.header {
+  padding: 5px;
+  background-color: red;
+  color: white;
+  line-height: 30px;
+  height: 40px;
+}
+
+.header .close {
+  color: white;
+  opacity: 1;
+}
+
+.menu {
+  .menu-item {
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 20px;
+
+    &.active {
+      background-color: $active-tab-background;
+      color: white;
+      position: relative;
+
+      &::after {
+        $height: 20px;
+        $width: 20px;
+        content: '';
+        position: absolute;
+        left: 50%;
+        margin-left: -$width;
+        bottom: -$height;
+        width: 0;
+        height: 0;
+        border-left: $height solid transparent;
+        border-right: $height solid transparent;
+
+        border-top: $width solid $active-tab-background;
+      }
+    }
+  }
+}
