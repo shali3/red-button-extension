@@ -1,0 +1,21 @@
+{
+  "name": "red-button",
+  "version": "0.2.0",
+  "homepage": "http://theredbutton.org/",
+  "authors": [
+    "ShaLi <shali3@gmail.com>"
+  ],
+  "description": "The Red Button - Fighting Cyberbulling",
+  "main": "addon/lib/main.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.3.15"
+  }
+}
