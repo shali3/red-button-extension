@@ -118,3 +118,4 @@ dist/
 chrome/
 
 bower_components
+addon/data/js/ext
