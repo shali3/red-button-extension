@@ -9,7 +9,8 @@ module.exports = function (grunt) {
                         expand: true,
                         flatten: true,
                         src: [
-                            'bower_components/angularjs/angular.min.js',
+                            'bower_components/angular/angular.min.js',
+                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                             'bower_components/jquery/dist/jquery.min.js'
                         ],
                         dest: 'addon/data/js/ext/'
