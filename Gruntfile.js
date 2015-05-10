@@ -6,9 +6,13 @@ module.exports = function (grunt) {
             dependencies: {
                 files: [
                     {
-                        expand: false,
-                        src: ['bower_components/angularjs/angular.min.js'],
-                        dest: 'addon/data/js'
+                        expand: true,
+                        flatten: true,
+                        src: [
+                            'bower_components/angularjs/angular.min.js',
+                            'bower_components/jquery/dist/jquery.min.js'
+                        ],
+                        dest: 'addon/data/js/ext/'
                     }
                 ]
             }
