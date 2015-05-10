@@ -10,6 +10,7 @@ module.exports = function (grunt) {
                         flatten: true,
                         src: [
                             'bower_components/angular/angular.min.js',
+                            'bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                             'bower_components/jquery/dist/jquery.min.js'
                         ],
@@ -23,7 +24,7 @@ module.exports = function (grunt) {
                 command: [
                     'cd addon',
                     'cfx xpi',
-                    'wget --post-file=pluginname.xpi http://localhost:8888/ || echo>/dev/null'
+                    'wget --post-file=red-button.xpi http://localhost:8888/ || echo>/dev/null'
                 ].join('&&')
             }
         },
@@ -41,6 +42,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default',
         [
             'copy:dependencies',
+            'shell:xpi',
             'watch'
         ]);
 };

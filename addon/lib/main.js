@@ -30,7 +30,7 @@ function handleChange(state) {
 
         const panelWidth = 300;
         panel = panels.Panel({
-            contentURL: self.data.url("panel.html"),
+            contentURL: self.data.url("new_panel.html"),
             contentScriptFile: [
                 self.data.url("js/jquery-2.1.3.min.js"),
                 self.data.url("js/mustache.min.js"),

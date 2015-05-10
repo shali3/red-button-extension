@@ -10,13 +10,33 @@
     opacity: 1;
 }
 
-.tabs-menu [class^=col-] {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #eee;
-    background-color: rgba(86, 61, 124, .15);
+.tabs-menu .active {
+    background-color: #002933;
 }
 
-.tabs-menu .active{
+.menu > .menu-item {
+    cursor: pointer;
+    text-align: center;
+    min-height: 100px;
+    margin-bottom: 20px ;
+
+}
+
+.menu > .menu-item.active {
     background-color: #002933;
+    color: white;
+    position: relative;
+}
+.menu > .menu-item.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    bottom: -20px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+
+    border-top: 20px solid #002933;
 }

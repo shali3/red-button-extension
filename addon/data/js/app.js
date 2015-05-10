@@ -1,16 +1,31 @@
 (function () {
-    var app = angular.module('app', ['ui.bootstrap']);
-    app.controller('TabsCtrl', function ($scope, $window) {
-        $scope.tabs = [
-            {title: 'Dynamic Title 1', content: 'Dynamic content 1'},
-            {title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true}
-        ];
-
-        $scope.alertMe = function () {
-            setTimeout(function () {
-                $window.alert('You\'ve selected the alert tab!');
-            });
-        };
-
-    });
+    var app = angular.module('app', ['ui.bootstrap', 'ui.router'])
+        .config(function ($stateProvider, $urlRouterProvider) {
+            //
+            // For any unmatched url, redirect to /state1
+            $urlRouterProvider.otherwise("/report");
+            //
+            // Now set up the states
+            $stateProvider
+                .state('report', {
+                    url: "/report",
+                    templateUrl: "views/report.html"
+                })
+                .state('myReports', {
+                    url: "/my-reports",
+                    templateUrl: "views/my-reports.html"
+                })
+                .state('heroes', {
+                    url: "/heroes",
+                    templateUrl: "views/heroes.html"
+                });
+        }).run(function ($rootScope) {
+            $rootScope.text = {
+                productName: 'The Red Button',
+                close: 'Close',
+                reportTab: 'Report',
+                myReports: 'My Reports',
+                heroes: 'Heroes'
+            };
+        });
 })();
