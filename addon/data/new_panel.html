@@ -3,11 +3,13 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/ext/angular.min.js"></script>
     <script src="js/ext/angular-ui-router.min.js"></script>
     <script src="js/ext/ui-bootstrap-tpls.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/report-controller.js"></script>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 </head>
 <body dir="auto">
@@ -17,7 +19,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="menu">
+<div class="menu clearfix">
     <div class="menu-item col-xs-4" ui-sref="report" ui-sref-active="active">{{text.reportTab}}</div>
     <div class="menu-item col-xs-4 " ui-sref="myReports" ui-sref-active="active">{{text.myReports}}</div>
     <div class="menu-item col-xs-4" ui-sref="heroes" ui-sref-active="active">{{text.heroes}}</div>

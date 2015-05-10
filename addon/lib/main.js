@@ -32,9 +32,8 @@ function handleChange(state) {
         panel = panels.Panel({
             contentURL: self.data.url("new_panel.html"),
             contentScriptFile: [
-                self.data.url("js/jquery-2.1.3.min.js"),
-                self.data.url("js/mustache.min.js"),
-                self.data.url("js/panel.js")],
+                self.data.url("js/page-script.js")
+            ],
             width: panelWidth,
             height: 400,
             onHide: handleHide
