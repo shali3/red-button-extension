@@ -28,7 +28,7 @@ function handleChange(state) {
         var imageDataUri = screenshots.captureTab();
         var tabUri = screenshots.getCurrentURI();
 
-        const panelWidth = 300;
+        const panelWidth = 350;
         panel = panels.Panel({
             contentURL: self.data.url("new_panel.html"),
             contentScriptFile: [
