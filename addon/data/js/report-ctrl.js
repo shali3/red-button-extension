@@ -1,10 +1,7 @@
-function ReportCtrl($scope) {
-    $scope.data = {};
+function ReportCtrl($scope, backgroundPage) {
 
-    window.addEventListener('message', function (event) {
-        $scope.$apply(function () {
-            $scope.data = event.data;
-        });
-    }, false);
+    backgroundPage.onScreenshot(function (screenshot) {
+        $scope.screenshot = screenshot;
+    });
 }
 app.controller("ReportCtrl", ReportCtrl);

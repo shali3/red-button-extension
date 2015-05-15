@@ -46,7 +46,7 @@ function handleChange(state) {
 
         panel.port.emit('init', {
             screenshot: imageDataUri,
-            url: tabUri,
+            tabUrl: tabUri,
             strings: {
                 comment_field_placeholder: _('comment_field_placeholder'),
                 passcode_placeholder: _('passcode_placeholder'),
