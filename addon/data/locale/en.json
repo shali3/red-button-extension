@@ -1,0 +1,16 @@
+{
+  "productName": "The Red Button",
+  "reportTab": "Report",
+  "myReports": "My Reports",
+  "heroes": "Heroes",
+  "screenshotSuccess": "The screenshot has been captured successfully",
+  "commentPlaceholder": "You can add a comment to the report",
+  "reportSuccessMessage": "The report was submitted successfully",
+  "redirectMessage": "You will be redirected to the report in a few seconds...",
+  "reportLimitError": "You can't report more than once in two minutes",
+  "noReportsMessage": "No reports have been made from this browser",
+  "reportStatusLink":"Check Reports Status",
+  "sending": "Sending...",
+  "close": "Close",
+  "send": "Send"
+}

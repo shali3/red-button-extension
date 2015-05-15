@@ -17,16 +17,10 @@ var app = angular.module('app', ['ui.bootstrap', 'ui.router'])
                 templateUrl: 'views/heroes.html'
             });
     })
-    .run(function ($rootScope) {
-        $rootScope.text = {
-            productName: 'The Red Button',
-            close: 'Close',
-            reportTab: 'Report',
-            myReports: 'My Reports',
-            heroes: 'Heroes',
-            screeshotSuccess: 'The screenshot has been captured successfully',
-            commentPlaceholder: 'You can add a comment to the report',
-            send: 'Send'
-
-        };
+    .run(function ($rootScope, $http) {
+        $http.get('locale/he.json').success(function (data) {
+            $rootScope.text = data;
+        }).error(function (error) {
+            $rootScope.text = {productName: error};
+        });
     });

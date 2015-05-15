@@ -1,0 +1,16 @@
+{
+  "productName": "הכפתור האדום",
+  "reportTab": "דיווח",
+  "myReports": "הדיווחים שלי",
+  "heroes": "אני הגיבור",
+  "screenshotSuccess": "צילום המסך נקלט בהצלחה",
+  "commentPlaceholder": "באפשרותך להוסיף הערה לתלונה",
+  "reportSuccessMessage": "הדיווח נשלח בהצלחה",
+  "redirectMessage": "בעוד כמה שניות תועבר למעקב הדיווח",
+  "reportLimitError": "אינך יכול/ה לדווח יותר מפעם אחת בשתי דקות",
+  "noReportsMessage": "לא התבצעו דיווחים מדפדפן זה",
+  "reportStatusLink": "מעבר לעמוד מעקב אחר דיווח",
+  "sending": "Sending...",
+  "close": "סגור",
+  "send": "שלח"
+}
