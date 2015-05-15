@@ -1,4 +1,5 @@
 @import "fonts";
+
 $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
@@ -21,26 +22,51 @@ $image-background: darken(white, 20%);
     text-align: center;
     padding: 10px;
     margin-bottom: 10px;
+    .icon {
+      height: 39px;
+      width: 40px;
+      background-repeat: no-repeat;
+      margin: 0 auto;
+      &.heroes {
+        background: url("../images/hero.png");
+      }
+
+      &.report {
+        background: url("../images/report.png");
+      }
+
+      &.myReports {
+        background: url("../images/list.png");
+      }
+    }
 
     &.active {
       background-color: $active-tab-background;
       color: white;
       position: relative;
 
+      .icon {
+        &.heroes {
+          background: url("../images/hero-selected.png");
+        }
+
+        &.report {
+          background: url("../images/report-selected.png");
+        }
+
+        &.myReports {
+          background: url("../images/list-selected.png");
+        }
+      }
       &::after {
-        $height: 10px;
-        $width: 10px;
+        background: url("../images/arrow.png");
         content: '';
+        width: 20px;
+        height: 5px;
         position: absolute;
         left: 50%;
-        margin-left: -$width;
-        bottom: -$height;
-        width: 0;
-        height: 0;
-        border-left: $height solid transparent;
-        border-right: $height solid transparent;
-
-        border-top: $width solid $active-tab-background;
+        margin-left: -10px;
+        bottom: -5px;
       }
     }
   }
