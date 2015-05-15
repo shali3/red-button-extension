@@ -18,6 +18,7 @@ var app = angular.module('app', ['ui.bootstrap', 'ui.router'])
             });
     })
     .run(function ($rootScope, $http) {
+        $rootScope.text = {};
         $http.get('locale/he.json').success(function (data) {
             $rootScope.text = data;
         }).error(function (error) {
