@@ -1,28 +1,7 @@
+@import "fonts";
 $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
-@font-face {
-  font-family: "Almoni DL AAA";
-  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "Almoni DL AAA";
-  font-weight: bold;
-  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-bold.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "Almoni DL AAA";
-  font-weight: 900;
-  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-black.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "Almoni DL AAA";
-  font-weight: 100;
-  src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-light.otf") format("opentype");
-}
 
 .header {
   padding: 5px;
