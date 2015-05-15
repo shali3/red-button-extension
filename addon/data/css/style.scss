@@ -18,10 +18,13 @@ $image-background: darken(white, 20%);
 
 .menu {
   .menu-item {
+    $gradient-grey: darken(white, 20%);
+    $gradient-size: 10%;
     cursor: pointer;
     text-align: center;
     padding: 10px;
     margin-bottom: 10px;
+    background: linear-gradient(to bottom, $gradient-grey 0%, #ffffff $gradient-size, #ffffff (100% - $gradient-size), $gradient-grey 100%);
     .icon {
       height: 39px;
       width: 40px;
@@ -41,7 +44,7 @@ $image-background: darken(white, 20%);
     }
 
     &.active {
-      background-color: $active-tab-background;
+      background: $active-tab-background;
       color: white;
       position: relative;
 
