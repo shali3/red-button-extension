@@ -30,7 +30,7 @@ function handleChange(state) {
 
         const panelWidth = 350;
         panel = panels.Panel({
-            contentURL: self.data.url("new_panel.html"),
+            contentURL: self.data.url("panel.html"),
             contentScriptFile: [
                 self.data.url("js/page-script.js")
             ],

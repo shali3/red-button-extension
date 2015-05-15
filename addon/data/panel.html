@@ -1,58 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/panel.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/ext/angular.min.js"></script>
+    <script src="js/ext/angular-ui-router.min.js"></script>
+    <script src="js/ext/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/report-ctrl.js"></script>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 </head>
 <body dir="auto">
-<div class="error-message" style="display: none;"></div>
-
-<div class="main">
-    <button id="reportButton" type="button" data-l10n-id="report_now" style="display: none"
-            class="btn btn-danger btn-block"></button>
-    <button id="viewReportsButton" type="button" data-l10n-id="view_old_reports" class="btn btn-default btn-block">Old
-        view old reports
+<div class="header text-center">
+    <span>{{text.productName}}</span>
+    <button type="button" class="close" tooltip-placement="left" tooltip="{{text.close}}" aria-label="{{text.close}}">
+        <span aria-hidden="true">&times;</span>
     </button>
-    <button type="button" class="close pull-left" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h2 data-l10n-id="product_name" class="text-center"></h2>
-
-    <div class="report-tab">
-        <form>
-            <div class="form-group">
-                <img id="screenshot" alt="" src="#"/>
-            </div>
-            <div class="form-group">
-                <textarea id="reportComment" class="form-control" rows="3"></textarea>
-            </div>
-            <div id="passcodeTextGroup" class="form-group">
-                <label id="passcodeLabel" class="control-label" data-l10n-id="passcode_label"
-                       for="passcodeText"></label>
-                <label id="passcodeValidationLabel" class="control-label" style="display: none;"
-                       data-l10n-id="passcode_label_validation" for="passcodeText"></label>
-                <input id="passcodeText" class="form-control" type="text">
-            </div>
-            <button id="submitButton" data-l10n-id="send_button" type="submit"
-                    class="btn btn-success btn-block form-control"></button>
-        </form>
-        <h4 id="successMessage" data-l10n-id="success_message" style="display: none"></h4>
-        <h5 id="redirectMessage" data-l10n-id="redirect_message" style="display: none"></h5>
-    </div>
-    <div class="old-reports-tab" style="display: none;">
-        <a href="http://redbutton.org.il/redbuttonstatus/" target="_blank" data-l10n-id="report_status_link"></a>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th data-l10n-id="report_id_header">Report #</th>
-                <th data-l10n-id="report_code_header">Code</th>
-            </tr>
-            </thead>
-            <tbody id="placeholder">
-            </tbody>
-        </table>
-        <h4 id="noReports" data-l10n-id="no_reports_message" style="display: none"></h4>
-    </div>
 </div>
+<div class="menu clearfix">
+    <div class="menu-item col-xs-4" ui-sref="report" ui-sref-active="active">{{text.reportTab}}</div>
+    <div class="menu-item col-xs-4 " ui-sref="myReports" ui-sref-active="active">{{text.myReports}}</div>
+    <div class="menu-item col-xs-4" ui-sref="heroes" ui-sref-active="active">{{text.heroes}}</div>
+</div>
+<ui-view></ui-view>
 </body>
 </html>
