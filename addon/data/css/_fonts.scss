@@ -1,10 +1,13 @@
 /* Almoni DL AAA */
-@font-face { //normal - 400
+@font-face {
+  //normal - 400
   font-family: "Almoni DL AAA";
+  font-weight: normal;
   src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-regular.otf") format("opentype");
 }
 
-@font-face { //bold - 700
+@font-face {
+  //bold - 700
   font-family: "Almoni DL AAA";
   font-weight: bold;
   src: url("fonts/almoni-dl-aaa/almoni-dl-aaa-bold.otf") format("opentype");
@@ -23,12 +26,15 @@
 }
 
 /* Almoni Tzar AAA */
-@font-face { // normal - 400
+@font-face {
+  // normal - 400
   font-family: "Almoni Tzar AAA";
+  font-weight: normal;
   src: url("fonts/almoni-tzar-aaa/almoni-tzar-aaa-regular.otf") format("opentype");
 }
 
-@font-face { // bold - 700
+@font-face {
+  // bold - 700
   font-family: "Almoni Tzar AAA";
   font-weight: bold;
   src: url("fonts/almoni-tzar-aaa/almoni-tzar-aaa-bold.otf") format("opentype");

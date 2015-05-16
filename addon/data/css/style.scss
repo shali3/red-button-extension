@@ -4,7 +4,16 @@ $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
 
+body {
+  font-family: "Almoni DL AAA";
+  font-weight: normal;
+  font-size: 14pt;
+}
+
 .header {
+  font-family: "Almoni Tzar AAA", "Almoni DL AAA";
+  font-weight: 200;
+  font-size: 20pt;
   padding: 5px;
   background-color: $header-red;
   color: white;
@@ -13,10 +22,14 @@ $image-background: darken(white, 20%);
   .close {
     color: white;
     opacity: 1;
+    font-weight: 100;
+    font-size: 20pt;
   }
 }
 
 .menu {
+  font-family: "Almoni Tzar AAA", "Almoni DL AAA";
+  font-weight: 200;
   .menu-item {
     $gradient-grey: darken(white, 20%);
     $gradient-size: 10%;
@@ -90,27 +103,34 @@ $image-background: darken(white, 20%);
 .report-form {
   text-align: center;
   .capture-message {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .screenshot {
     margin: 20px 0;
     background-color: $image-background;
+    height: 150px;
+
     img {
-      max-height: 150px;
+      height: 150px;
       max-width: 100%;
     }
   }
   .comment {
     padding: 5px;
     textarea {
+      font-size: 14pt;
       min-height: 80px;
+      max-height: 80px;
       min-width: 100%;
       max-width: 100%;
     }
   }
 
   .submit {
-    $size: 100px;
+    $size: 90px;
+    font-family: "Almoni Tzar AAA", "Almoni DL AAA";
+    font-weight: 100;
+    font-size: 22pt;
     border: none;
     background: transparent url("../images/main-button.png") no-repeat;
     background-size: $size $size;
