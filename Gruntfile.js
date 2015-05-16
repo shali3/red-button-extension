@@ -38,6 +38,23 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-copy');
+
+    grunt.registerTask(
+        'manifest', 'Extend manifest.json with extra fields from package.json',
+        function () {
+            var pkg = grunt.file.readJSON('package.json');
+            var chrome = grunt.file.readJSON('chrome/manifest.json');
+            var firefox = grunt.file.readJSON('firefox/package.json');
+            var fields = ['version'];
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                chrome[field] = firefox[field] = pkg[field];
+            }
+            grunt.file.write('build/chrome/manifest.json', JSON.stringify(chrome, null, 4));
+            grunt.file.write('build/firefox/package.json', JSON.stringify(firefox, null, 4));
+            grunt.log.ok('manifest files generated');
+        }
+    );
     grunt.registerTask('default',
         [
             'copy:dependencies',
