@@ -50,8 +50,8 @@ module.exports = function (grunt) {
                 var field = fields[i];
                 chrome[field] = firefox[field] = pkg[field];
             }
-            grunt.file.write('build/chrome/manifest.json', JSON.stringify(chrome, null, 4));
-            grunt.file.write('build/firefox/package.json', JSON.stringify(firefox, null, 4));
+            grunt.file.write('build/chrome/manifest.json', JSON.stringify(chrome, null, 2));
+            grunt.file.write('build/firefox/package.json', JSON.stringify(firefox, null, 2));
             grunt.log.ok('manifest files generated');
         }
     );
