@@ -118,7 +118,7 @@ dist/
 chrome_old/
 
 bower_components
-addon/data/js/ext
+firefox/data/js/ext
 
-addon/data/css/style.css
-addon/data/css/style.css.map
+firefox/data/css/style.css
+firefox/data/css/style.css.map
