@@ -115,7 +115,7 @@ dist/
 # firefox extentions
 *.xpi
 
-chrome/
+chrome_old/
 
 bower_components
 addon/data/js/ext
