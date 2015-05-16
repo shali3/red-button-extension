@@ -1,6 +1,5 @@
 module.exports = function (grunt) {
     'use strict';
-    //require('matchdep').filterDev('grunt-!(cli)').forEach(grunt.loadNpmTasks);
     grunt.initConfig({
         copy: {
             dependencies: {
@@ -14,7 +13,7 @@ module.exports = function (grunt) {
                             'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                             'bower_components/jquery/dist/jquery.min.js'
                         ],
-                        dest: 'addon/data/js/ext/'
+                        dest: 'firefox/data/js/ext/'
                     }
                 ]
             }
@@ -22,7 +21,7 @@ module.exports = function (grunt) {
         shell: {
             xpi: {
                 command: [
-                    'cd addon',
+                    'cd firefox',
                     'cfx xpi',
                     'wget --post-file=red-button.xpi http://localhost:8888/ || echo>/dev/null'
                 ].join('&&')
@@ -30,7 +29,7 @@ module.exports = function (grunt) {
         },
         watch: {
             xpi: {
-                files: ['addon/**'],
+                files: ['firefox/**'],
                 tasks: ['shell:xpi']
             }
         }
