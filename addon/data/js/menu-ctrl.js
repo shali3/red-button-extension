@@ -2,7 +2,7 @@
  * Created by ShaLi on 5/15/15.
  */
 'use strict';
-function MenuCtrl($scope, $rootScope) {
+function MenuCtrl($scope, $rootScope, backgroundPage) {
     function setMenuItems() {
         $scope.menuItems = [
             {
@@ -22,5 +22,7 @@ function MenuCtrl($scope, $rootScope) {
 
     setMenuItems();
     $rootScope.$watch('text', setMenuItems);
+
+    $scope.close = backgroundPage.sendClose;
 }
 app.controller('MenuCtrl', MenuCtrl);

@@ -7,13 +7,15 @@ function backgroundPage($window, $rootScope) {
     var callbacks = {};
 
     function raiseEvent(event) {
-        var message = event.data.message;
-        var data = event.data.data;
-        latestData[message] = data;
-        if (callbacks[message]) {
+        if (event.data && event.data.from === 'script') {
+            var message = event.data.message;
+            var data = event.data.data;
+            latestData[message] = data;
             if (callbacks[message]) {
-                callbacks[message](data);
-                $rootScope.$apply();
+                if (callbacks[message]) {
+                    callbacks[message](data);
+                    $rootScope.$apply();
+                }
             }
         }
     }
@@ -26,6 +28,10 @@ function backgroundPage($window, $rootScope) {
             }
         }
         callbacks[eventName] = callback;
+    }
+
+    function sendMessage(messageName, data) {
+        $window.postMessage({from: 'app', message: messageName, data: data}, $window.location.origin);
     }
 
     this.registerEventListerner = function () {
@@ -41,6 +47,9 @@ function backgroundPage($window, $rootScope) {
     this.onReports = function (callback) {
         registerEvent('reports', callback);
     };
+    this.sendClose = function () {
+        sendMessage('close');
+    }
 }
 
 app.service('backgroundPage', backgroundPage);

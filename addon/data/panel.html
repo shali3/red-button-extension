@@ -15,21 +15,28 @@
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 </head>
 <body dir="auto">
-<div class="header text-center">
-    <span>{{text.productName}}</span>
-    <button type="button" class="close" tooltip-placement="left" tooltip="{{text.close}}" aria-label="{{text.close}}">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="menu clearfix" ng-controller="MenuCtrl">
-    <div class="menu-item col-xs-4"
-         ui-sref="{{mi.name}}"
-         ui-sref-active="active"
-            ng-repeat="mi in menuItems">
-        <div class="icon {{mi.name}}"></div>
-        <div class="text">{{mi.text}}</div>
+<header ng-controller="MenuCtrl">
+    <div class="header text-center">
+        <span>{{text.productName}}</span>
+        <button type="button"
+                class="close"
+                tooltip-placement="left"
+                tooltip="{{text.close}}"
+                ng-click="close()"
+                aria-label="{{text.close}}">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
+    <div class="menu clearfix" >
+        <div class="menu-item col-xs-4 pull-right"
+             ui-sref="{{mi.name}}"
+             ui-sref-active="active"
+             ng-repeat="mi in menuItems">
+            <div class="icon {{mi.name}}"></div>
+            <div class="text">{{mi.text}}</div>
+        </div>
+    </div>
+</header>
 <ui-view></ui-view>
 </body>
 </html>
