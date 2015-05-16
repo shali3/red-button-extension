@@ -14,7 +14,7 @@
     <script src="js/report-ctrl.js"></script>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 </head>
-<body dir="auto">
+<body dir="{{text.direction}}">
 <header ng-controller="MenuCtrl">
     <div class="header text-center">
         <span>{{text.productName}}</span>
@@ -28,7 +28,7 @@
         </button>
     </div>
     <div class="menu clearfix" >
-        <div class="menu-item col-xs-4 pull-right"
+        <div class="menu-item col-xs-4"
              ui-sref="{{mi.name}}"
              ui-sref-active="active"
              ng-repeat="mi in menuItems">

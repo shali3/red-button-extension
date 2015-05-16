@@ -1,4 +1,5 @@
 {
+  "direction": "ltr",
   "productName": "The Red Button",
   "reportTab": "Report",
   "myReports": "My Reports",
@@ -9,7 +10,7 @@
   "redirectMessage": "You will be redirected to the report in a few seconds...",
   "reportLimitError": "You can't report more than once in two minutes",
   "noReportsMessage": "No reports have been made from this browser",
-  "reportStatusLink":"Check Reports Status",
+  "reportStatusLink": "Check Reports Status",
   "sending": "Sending...",
   "close": "Close",
   "send": "Send"

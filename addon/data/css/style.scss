@@ -9,6 +9,11 @@ body {
   font-weight: normal;
   font-size: 14pt;
 }
+body[dir="rtl"]{
+  .menu-item{
+    float: right;
+  }
+}
 
 .header {
   font-family: "Almoni Tzar AAA", "Almoni DL AAA";
