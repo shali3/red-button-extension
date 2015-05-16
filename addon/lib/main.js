@@ -82,7 +82,7 @@ function handleChange(state) {
                 onReady: function (tab) {
                     tab.attach({
                         contentScriptFile: [
-                            self.data.url("js/jquery-2.1.3.min.js"),
+                            self.data.url("js/ext/jquery-2.1.3.min.js"),
                             self.data.url("js/content-script.js")
                         ],
                         contentScriptOptions: report
