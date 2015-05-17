@@ -55,6 +55,29 @@ module.exports = function (grunt) {
             grunt.log.ok('manifest files generated');
         }
     );
+
+    grunt.registerTask(
+        'locales', 'Copy the localized strings in each browser format',
+        function () {
+            var locales = ['en', 'he'];
+            for (var i = 0; i < locales.length; i++) {
+                var firefox = '';
+                var chrome = {};
+                var localeName = locales[i];
+                var locale = grunt.file.readJSON('common/locales/' + localeName + '.json');
+                for (var key in locale) {
+                    var value = locale[key];
+                    firefox += key + '=' + value + '\n';
+                    chrome[key] = {message: value};
+                }
+
+                grunt.file.write('build/firefox/locale/' + localeName + '.properties', firefox);
+                grunt.file.write('build/chrome/_locales/' + localeName + '/messages.json', JSON.stringify(chrome, null, 2));
+                grunt.log.ok('locale files generated for ' + localeName);
+
+            }
+        }
+    );
     grunt.registerTask('default',
         [
             'copy:dependencies',
