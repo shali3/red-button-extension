@@ -1,8 +1,25 @@
 module.exports = function (grunt) {
     'use strict';
+    // require it at the top and pass in the grunt instance
+    require('time-grunt')(grunt);
+    require('load-grunt-tasks')(grunt);
+
+
     grunt.initConfig({
         copy: {
-            dependencies: {
+            firefoxDep: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [
+                            'bower_components/jquery/dist/jquery.min.js'
+                        ],
+                        dest: 'firefox/data/js/ext/'
+                    }
+                ]
+            },
+            popupDep: {
                 files: [
                     {
                         expand: true,
@@ -10,12 +27,48 @@ module.exports = function (grunt) {
                         src: [
                             'bower_components/angular/angular.min.js',
                             'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-                            'bower_components/jquery/dist/jquery.min.js'
+                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
                         ],
-                        dest: 'firefox/data/js/ext/'
+                        dest: 'build/popup/js/ext/'
                     }
                 ]
+            },
+            popup: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'common/popup',
+                        src: [
+                            'css/fonts/**',
+                            'images/**',
+                            'views/**',
+                            'index.html'
+                        ],
+                        dest: 'build/popup/'
+                    }
+                ]
+            }
+        },
+        concat: {
+            popup: {
+                src: ['common/popup/js/app.js', 'common/popup/js/*.js'],
+                dest: 'build/popup/js/app.js'
+            }
+        },
+        concurrent: {
+            options: {
+                logConcurrentOutput: true
+            },
+            popupDev: ['watch:sass', 'watch:popup']
+        },
+        sass: {
+            options: {
+                sourceMap: true
+            },
+            popup: {
+                files: {
+                    'build/popup/css/style.css': 'common/popup/css/style.scss'
+                }
             }
         },
         shell: {
@@ -28,21 +81,27 @@ module.exports = function (grunt) {
             }
         },
         watch: {
+            options: {spawn: false},
+
             xpi: {
                 files: ['firefox/**'],
                 tasks: ['shell:xpi']
+            },
+            sass: {
+                files: ['common/popup/css/*.scss'],
+                tasks: ['sass:popup']
+            },
+            popup: {
+                files: ['common/popup/**', '!common/popup/css/*.scss'],
+                tasks: ['copy:popup', 'concat:popup']
             }
         },
         clean: {
-            build: ['build/']
+            buildPopup: ['build/popup']
         }
     })
     ;
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.registerTask(
         'manifest', 'Extend manifest.json with extra fields from package.json',
@@ -82,10 +141,25 @@ module.exports = function (grunt) {
             });
         }
     );
-    grunt.registerTask('build', ['clean:build', 'manifest', 'locales']);
+    grunt.registerTask('build', [
+        'clean:buildPopup',
+        'manifest',
+        'locales']);
+    grunt.registerTask('popup:dev', [
+        'popup:build',
+        'concurrent:popupDev'
+    ]);
+    grunt.registerTask('popup:build', [
+        'clean:buildPopup',
+        'copy:popupDep',
+        'copy:popup',
+        'concat:popup',
+        'sass:popup'
+
+    ]);
     grunt.registerTask('default',
         [
-            'copy:dependencies',
+            'copy:firefoxDep',
             'shell:xpi',
             'watch'
         ]);
