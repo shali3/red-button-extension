@@ -78,6 +78,26 @@ module.exports = function (grunt) {
                     }
                 ]
 
+            },
+            iconsFirefox:{
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'common/icons',
+                        src: ['**'],
+                        dest: 'build/firefox/data/images/icons'
+                    }
+                ]
+            },
+            iconsChrome:{
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'common/icons',
+                        src: ['**'],
+                        dest: 'build/chrome/images/icons'
+                    }
+                ]
             }
         },
         concat: {
@@ -195,6 +215,7 @@ module.exports = function (grunt) {
         'popup:build',
         'copy:firefox',
         'copy:firefoxDep',
+        'copy:iconsFirefox',
         'copy:popupFirefox',
         'manifest',
         'locales',

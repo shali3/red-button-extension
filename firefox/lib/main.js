@@ -13,8 +13,8 @@ var button = buttons.ToggleButton({
     id: "red-button",
     label: _("product_name"),
     icon: {
-        "16": "./images/icon-16.png",
-        "32": "./images/icon-32.png"
+        "16": "./images/icons/16.png",
+        "32": "./images/icons/32.png"
         //"64": "./images/icon-64.png" TODO: Add icon-64
     },
     onChange: handleChange
