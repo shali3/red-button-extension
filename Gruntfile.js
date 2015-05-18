@@ -32,12 +32,17 @@ module.exports = function (grunt) {
                 files: ['firefox/**'],
                 tasks: ['shell:xpi']
             }
+        },
+        clean: {
+            build: ['build/']
         }
-    });
+    })
+    ;
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.registerTask(
         'manifest', 'Extend manifest.json with extra fields from package.json',
@@ -59,12 +64,11 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'locales', 'Copy the localized strings in each browser format',
         function () {
-            var locales = ['en', 'he'];
-            for (var i = 0; i < locales.length; i++) {
+            grunt.file.expand('common/locales/*.json').forEach(function (filePath) {
+                var localeName = filePath.split('/').pop().split('.')[0];
+                var locale = grunt.file.readJSON(filePath);
                 var firefox = '';
                 var chrome = {};
-                var localeName = locales[i];
-                var locale = grunt.file.readJSON('common/locales/' + localeName + '.json');
                 for (var key in locale) {
                     var value = locale[key];
                     firefox += key + '=' + value + '\n';
@@ -75,13 +79,15 @@ module.exports = function (grunt) {
                 grunt.file.write('build/chrome/_locales/' + localeName + '/messages.json', JSON.stringify(chrome, null, 2));
                 grunt.log.ok('locale files generated for ' + localeName);
 
-            }
+            });
         }
     );
+    grunt.registerTask('build', ['clean:build', 'manifest', 'locales']);
     grunt.registerTask('default',
         [
             'copy:dependencies',
             'shell:xpi',
             'watch'
         ]);
-};
+}
+;
