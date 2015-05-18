@@ -26,10 +26,6 @@ build/
 # Chrome extensions
 *.crx
 
-chrome_old/
+chrome_old
 
 bower_components
-firefox/data/js/ext
-
-firefox/data/css/style.css
-firefox/data/css/style.css.map
