@@ -48,6 +48,16 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            popupLocales: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'common/locales',
+                        src: ['**'],
+                        dest: 'build/popup/locales'
+                    }
+                ]
+            },
             popupFirefox: {
                 files: [
                     {
@@ -196,8 +206,9 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('popup:build', [
         'clean:popup',
-        'copy:popupDep',
         'copy:popup',
+        'copy:popupDep',
+        'copy:popupLocales',
         'concat:popup',
         'sass:popup'
 
