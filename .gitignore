@@ -25,6 +25,7 @@ build/
 
 # Chrome extensions
 *.crx
+*.pem
 
 chrome_old
 

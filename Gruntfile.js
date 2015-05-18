@@ -152,6 +152,13 @@ module.exports = function (grunt) {
                 ].join('&&')
             }
         },
+        crx: {
+
+            default: {
+                src: 'build/chrome',
+                dest: 'dist/crx/'
+            }
+        },
         watch: {
             options: {spawn: false},
 
@@ -227,6 +234,11 @@ module.exports = function (grunt) {
     );
 
     grunt.registerTask('build', ['chrome:build', 'firefox:build']);
+
+    grunt.registerTask('chrome:pack', [
+        'chrome:build',
+        'crx'
+    ]);
 
     grunt.registerTask('chrome:build', [
         'clean:chrome',
