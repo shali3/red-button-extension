@@ -15,7 +15,7 @@ module.exports = function (grunt) {
                         src: [
                             'bower_components/jquery/dist/jquery.min.js'
                         ],
-                        dest: 'firefox/data/js/ext/'
+                        dest: 'build/firefox/data/js/ext/'
                     }
                 ]
             },
@@ -47,6 +47,27 @@ module.exports = function (grunt) {
                         dest: 'build/popup/'
                     }
                 ]
+            },
+            popupFirefox: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'build/popup',
+                        src: ['**'],
+                        dest: 'build/firefox/data/popup/'
+                    }
+                ]
+            },
+            firefox: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'firefox',
+                        src: ['**'],
+                        dest: 'build/firefox/'
+                    }
+                ]
+
             }
         },
         concat: {
@@ -59,7 +80,8 @@ module.exports = function (grunt) {
             options: {
                 logConcurrentOutput: true
             },
-            popupDev: ['watch:sass', 'watch:popup']
+            popupDev: ['watch:sass', 'watch:popup'],
+            firefox: ['concurrent:popupDev', 'watch:firefoxPopup', 'watch:firefox']
         },
         sass: {
             options: {
@@ -74,7 +96,7 @@ module.exports = function (grunt) {
         shell: {
             xpi: {
                 command: [
-                    'cd firefox',
+                    'cd build/firefox',
                     'cfx xpi',
                     'wget --post-file=red-button.xpi http://localhost:8888/ || echo>/dev/null'
                 ].join('&&')
@@ -94,10 +116,21 @@ module.exports = function (grunt) {
             popup: {
                 files: ['common/popup/**', '!common/popup/css/*.scss'],
                 tasks: ['copy:popup', 'concat:popup']
+            },
+            firefoxPopup: {
+                files: ['build/popup/**'],
+                tasks: ['copy:popupFirefox']
+            },
+            firefox: {
+                files: ['firefox/**', 'common/locales/**', 'build/popup/**'],
+                tasks: ['firefox:build']
+
             }
+
         },
         clean: {
-            buildPopup: ['build/popup']
+            popup: ['build/popup'],
+            firefox: ['build/firefox']
         }
     })
     ;
@@ -141,16 +174,28 @@ module.exports = function (grunt) {
             });
         }
     );
-    grunt.registerTask('build', [
-        'clean:buildPopup',
+
+    grunt.registerTask('firefox:dev', [
+        'firefox:build',
+        'concurrent:firefox'
+    ]);
+
+    grunt.registerTask('firefox:build', [
+        'clean:firefox',
+        'popup:build',
+        'copy:firefox',
+        'copy:firefoxDep',
+        'copy:popupFirefox',
         'manifest',
-        'locales']);
+        'locales',
+        'shell:xpi'
+    ]);
     grunt.registerTask('popup:dev', [
         'popup:build',
         'concurrent:popupDev'
     ]);
     grunt.registerTask('popup:build', [
-        'clean:buildPopup',
+        'clean:popup',
         'copy:popupDep',
         'copy:popup',
         'concat:popup',
