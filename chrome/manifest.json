@@ -4,10 +4,11 @@
   "name": "__MSG_productName__",
   "description": "__MSG_productDescription__",
   "version": "Replaced By grunt",
+  "default_locale": "he",
 
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_icon": "images/icons/32.png",
+    "default_popup": "popup/index.html"
   },
   "permissions": [
     "activeTab",

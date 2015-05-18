@@ -79,7 +79,27 @@ module.exports = function (grunt) {
                 ]
 
             },
-            iconsFirefox:{
+            popupChrome: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'build/popup',
+                        src: ['**'],
+                        dest: 'build/chrome/popup/'
+                    }
+                ]
+            },
+            chrome: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'chrome',
+                        src: ['**'],
+                        dest: 'build/chrome/'
+                    }
+                ]
+            },
+            iconsFirefox: {
                 files: [
                     {
                         expand: true,
@@ -89,7 +109,7 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            iconsChrome:{
+            iconsChrome: {
                 files: [
                     {
                         expand: true,
@@ -160,6 +180,7 @@ module.exports = function (grunt) {
         },
         clean: {
             popup: ['build/popup'],
+            chrome: ['build/chrome'],
             firefox: ['build/firefox']
         }
     })
@@ -204,6 +225,19 @@ module.exports = function (grunt) {
             });
         }
     );
+
+    grunt.registerTask('build', ['chrome:build', 'firefox:build']);
+
+    grunt.registerTask('chrome:build', [
+        'clean:chrome',
+        'popup:build',
+        'copy:chrome',
+        'copy:iconsChrome',
+        'copy:popupChrome',
+        'manifest',
+        'locales'
+    ]);
+
 
     grunt.registerTask('firefox:dev', [
         'firefox:build',

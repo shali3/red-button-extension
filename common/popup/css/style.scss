@@ -4,13 +4,15 @@ $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
 
-body {
+html, body {
+  min-width: 300px;
   font-family: "Almoni DL AAA";
   font-weight: normal;
   font-size: 14pt;
 }
-body[dir="rtl"]{
-  .menu-item{
+
+body[dir="rtl"] {
+  .menu-item {
     float: right;
   }
 }
@@ -107,6 +109,7 @@ body[dir="rtl"]{
 
 .report-form {
   text-align: center;
+  padding-bottom: 30px;
   .capture-message {
     margin-top: 10px;
   }
