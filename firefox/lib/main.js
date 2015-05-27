@@ -14,8 +14,8 @@ var button = buttons.ToggleButton({
     label: _("product_name"),
     icon: {
         "16": "./images/icons/16.png",
-        "32": "./images/icons/32.png"
-        //"64": "./images/icon-64.png" TODO: Add icon-64
+        "32": "./images/icons/32.png",
+        "64": "./images/icons/64.png"
     },
     onChange: handleChange
 });
