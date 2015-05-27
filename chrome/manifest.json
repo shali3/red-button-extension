@@ -16,6 +16,12 @@
     },
     "default_popup": "popup/index.html"
   },
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "background.js"
+    ]
+  },
   "permissions": [
     "activeTab",
     "http://redbuttonproject.org/",

@@ -73,7 +73,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'firefox',
-                        src: ['**'],
+                        src: ['**', '!popup/**'],
                         dest: 'build/firefox/'
                     }
                 ]
@@ -89,12 +89,22 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            chromeDependencies: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['bower_components/jquery/dist/jquery.min.js'],
+                        dest: 'build/chrome/'
+                    }
+                ]
+            },
             chrome: {
                 files: [
                     {
                         expand: true,
                         cwd: 'chrome',
-                        src: ['**'],
+                        src: ['**', '!popup/**'],
                         dest: 'build/chrome/'
                     }
                 ]
@@ -260,6 +270,7 @@ module.exports = function (grunt) {
         'clean:chrome',
         'popup:build',
         'copy:chrome',
+        'copy:chromeDependencies',
         'copy:iconsChrome',
         'copy:popupChrome',
         'concat:popupChrome',
