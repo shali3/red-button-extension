@@ -4,8 +4,9 @@
   "id": "jid1-fDzPe9hyltQvCA@red-button",
   "description": "The Red Button - Fighting Cyberbulling",
   "author": "ShaLi Shaltiel",
-  "license": "MPL 2.0",
+  "license": "GPL-3.0",
   "version": "0.2.0",
   "icon": "data/images/icons/64.png",
+  "icon64": "data/images/icons/64.png",
   "main": "lib/main.js"
 }
