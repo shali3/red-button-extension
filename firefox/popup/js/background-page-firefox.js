@@ -2,7 +2,7 @@
  * Created by ShaLi on 5/15/15.
  */
 'use strict';
-function backgroundPage($window, $rootScope) {
+function backgroundPageFirefox($window, $rootScope) {
     var latestData = {};
     var callbacks = {};
 
@@ -52,7 +52,7 @@ function backgroundPage($window, $rootScope) {
     }
 }
 
-app.service('backgroundPage', backgroundPage);
+app.service('backgroundPage', backgroundPageFirefox);
 app.run(function (backgroundPage) {
     backgroundPage.registerEventListerner();
 });

@@ -122,8 +122,16 @@ module.exports = function (grunt) {
         },
         concat: {
             popup: {
-                src: ['common/popup/js/app.js', 'common/popup/js/*.js'],
+                src: ['common/popup/js/app.js', 'common/popup/js/**/*.js'],
                 dest: 'build/popup/js/app.js'
+            },
+            popupFirefox: {
+                src: ['common/popup/js/app.js', 'common/popup/js/**/*.js', 'firefox/popup/js/**.js', '!common/popup/js/dev/**/*.js'],
+                dest: 'build/firefox/data/popup/js/app.js'
+            },
+            popupChrome: {
+                src: ['common/popup/js/app.js', 'common/popup/js/**/*.js', 'chrome/popup/js/**.js', '!common/popup/js/dev/**/*.js'],
+                dest: 'build/chrome/popup/js/app.js'
             }
         },
         concurrent: {
@@ -246,6 +254,7 @@ module.exports = function (grunt) {
         'copy:chrome',
         'copy:iconsChrome',
         'copy:popupChrome',
+        'concat:popupChrome',
         'manifest',
         'locales'
     ]);
@@ -263,6 +272,7 @@ module.exports = function (grunt) {
         'copy:firefoxDep',
         'copy:iconsFirefox',
         'copy:popupFirefox',
+        'concat:popupFirefox',
         'manifest',
         'locales',
         'shell:xpi'
