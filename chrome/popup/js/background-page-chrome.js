@@ -2,7 +2,7 @@
  * Created by ShaLi on 5/27/15.
  */
 'use strict';
-function backgroundPageChrome($rootScope) {
+function backgroundPageChrome($rootScope,$window) {
     this.onScreenshot = function (callback) {
         chrome.tabs.captureVisibleTab(null, {"format": "png"}, function (screenshot) {
             callback(screenshot);
@@ -18,7 +18,8 @@ function backgroundPageChrome($rootScope) {
         callback(null);
     };
     this.sendClose = function () {
-        console.log('closeCalled');
+
+        $window.close();
     }
 }
 
