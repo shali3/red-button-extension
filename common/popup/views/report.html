@@ -3,11 +3,13 @@
     <div class="capture-message">{{text.screenshotSuccess}}</div>
 
     <div class="screenshot">
-        <img ng-src="{{screenshot}}" alt="Screenshot">
+        <img ng-src="{{reportData.screenCaptureBase64png}}" alt="Screenshot">
     </div>
-    <form>
+    <form ng-submit="sendReport()">
         <div class="comment">
-            <textarea class="form-control" type="text" placeholder="{{text.commentPlaceholder}}"></textarea>
+            <textarea class="form-control" type="text"
+                      ng-model="reportData.comment"
+                      placeholder="{{text.commentPlaceholder}}"></textarea>
         </div>
         <input class="submit" type="submit" value="{{text.send}}">
     </form>

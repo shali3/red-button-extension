@@ -2,9 +2,10 @@
  * Created by ShaLi on 5/15/15.
  */
 'use strict';
-function backgroundPageFirefox($window, $rootScope) {
-    var latestData = {};
-    var callbacks = {};
+function backgroundPageFirefox($window, $rootScope, $q) {
+    var latestData = {},
+        callbacks = {},
+        sendReportDefer;
 
     function raiseEvent(event) {
         if (event.data && event.data.from === 'script') {
@@ -17,6 +18,14 @@ function backgroundPageFirefox($window, $rootScope) {
                     $rootScope.$apply();
                 }
             }
+        }
+    }
+
+
+    function registerEventOnce(eventName, callback) {
+        callbacks[eventName] = function (data) {
+            delete callbacks[eventName];
+            callback(data);
         }
     }
 
@@ -49,6 +58,20 @@ function backgroundPageFirefox($window, $rootScope) {
     };
     this.sendClose = function () {
         sendMessage('close');
+    };
+    this.sendReport = function (reportData) {
+        if (sendReportDefer) return $q(function (resolve, reject) {
+            reject('Another report is in progress');
+        });
+        sendReportDefer = $q.defer();
+        sendReportDefer.promise.finally(function () {
+            sendReportDefer = null;
+        });
+        registerEventOnce('postReportSuccess', sendReportDefer.resolve);
+        registerEventOnce('postReportError', sendReportDefer.reject);
+
+        sendMessage('postReport',reportData);
+        return sendReportDefer.promise;
     }
 }
 

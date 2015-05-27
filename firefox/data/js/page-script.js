@@ -3,30 +3,30 @@
  */
 
 
-function onMessage(event) {
+function onMessageFromApp(event) {
     if (event.data && event.data.from === 'app') {
         var message = event.data.message;
         var data = event.data.data;
-        if (listener[message]) {
-            if (listener[message]) {
-                listener[message](data);
-            }
-        }
+        //alert('sending message ' + message);
+        self.port.emit(message, data); // Sends the message to the background page.
     }
 }
-function sendMessage(messageName, data) {
+window.addEventListener('message', onMessageFromApp);
+
+function sendMessageToApp(messageName, data) {
     window.postMessage({from: 'script', message: messageName, data: data}, window.location.origin);
 }
 
-window.addEventListener('message', onMessage);
+function registerListenerFromBackground(messageName) {
+    self.port.on(messageName, function (data) {
+        sendMessageToApp(messageName, data);
+    });
+}
 self.port.on('init', function (data) {
-    sendMessage('screenshot', data.screenshot);
-    sendMessage('tabUrl', data.tabUrl);
-    sendMessage('reports', data.reports);
+    sendMessageToApp('screenshot', data.screenshot);
+    sendMessageToApp('tabUrl', data.tabUrl);
+    sendMessageToApp('reports', data.reports);
 });
 
-var listener = {
-    close: function () {
-        self.port.emit('close', null);
-    }
-};
+registerListenerFromBackground('postReportSuccess');
+registerListenerFromBackground('postReportError');
