@@ -139,7 +139,8 @@ module.exports = function (grunt) {
                 logConcurrentOutput: true
             },
             popupDev: ['watch:sass', 'watch:popup'],
-            firefox: ['concurrent:popupDev', 'watch:firefoxPopup', 'watch:firefox']
+            firefox: ['concurrent:popupDev', 'watch:firefox'],
+            chrome: ['concurrent:popupDev', 'watch:chrome']
         },
         sass: {
             options: {
@@ -182,13 +183,14 @@ module.exports = function (grunt) {
                 files: ['common/popup/**', '!common/popup/css/*.scss'],
                 tasks: ['copy:popup', 'concat:popup']
             },
-            firefoxPopup: {
-                files: ['build/popup/**'],
-                tasks: ['copy:popupFirefox']
-            },
             firefox: {
-                files: ['firefox/**', 'common/locales/**', 'build/popup/**'],
+                files: ['build/popup/**', 'firefox/**', 'common/locales/**', 'build/popup/**'],
                 tasks: ['firefox:build']
+
+            },
+            chrome: {
+                files: ['build/popup/**', 'chrome/**', 'common/locales/**', 'build/popup/**'],
+                tasks: ['chrome:build']
 
             }
 
@@ -246,6 +248,12 @@ module.exports = function (grunt) {
     grunt.registerTask('chrome:pack', [
         'chrome:build',
         'crx'
+    ]);
+
+
+    grunt.registerTask('chrome:dev', [
+        'chrome:build',
+        'concurrent:chrome'
     ]);
 
     grunt.registerTask('chrome:build', [
