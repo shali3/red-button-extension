@@ -298,11 +298,6 @@ module.exports = function (grunt) {
         'sass:popup'
 
     ]);
-    grunt.registerTask('default',
-        [
-            'copy:firefoxDep',
-            'shell:xpi',
-            'watch'
-        ]);
+    grunt.registerTask('default', ['build']);
 }
 ;
