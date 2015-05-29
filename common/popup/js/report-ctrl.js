@@ -13,13 +13,13 @@ function ReportCtrl($scope, backgroundPage) {
     $scope.sendReport = function () {
         $scope.sendingReport = true;
         backgroundPage.sendReport($scope.reportData).then(function (res) {
-            alert('report Success');
-        },
-        function(error){
-            alert('report Error');
-        }).finally(function () {
-            $scope.sendingReport = false;
-        });
+                $scope.response = response;
+            },
+            function (error) {
+                $scope.error = error;
+            }).finally(function () {
+                $scope.sendingReport = false;
+            });
     };
 }
 app.controller("ReportCtrl", ReportCtrl);
