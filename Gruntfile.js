@@ -104,7 +104,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'chrome',
-                        src: ['**', '!popup/**'],
+                        src: ['**', '!popup/**', '!background/**'],
                         dest: 'build/chrome/'
                     }
                 ]
@@ -209,7 +209,15 @@ module.exports = function (grunt) {
             popup: ['build/popup'],
             chrome: ['build/chrome'],
             firefox: ['build/firefox']
+        },
+        browserify: {
+            chrome: {
+                files: {
+                    'build/chrome/background.js': ['chrome/background/main.js']
+                }
+            }
         }
+
     })
     ;
 
@@ -271,6 +279,7 @@ module.exports = function (grunt) {
         'popup:build',
         'copy:chrome',
         'copy:chromeDependencies',
+        'browserify:chrome',
         'copy:iconsChrome',
         'copy:popupChrome',
         'concat:popupChrome',
