@@ -1,7 +1,7 @@
 <div class="report-form">
     <form ng-submit="sendReport()" ng-hide="response">
-        <div class="capture-message">{{text.screenshotSuccess}}</div>
-        <div ng-show="error">{{error|json}}</div>
+        <div ng-hide="error" class="capture-message">{{text.screenshotSuccess}}</div>
+        <div ng-show="error" class="error-message">{{text[error]||error.message||error}}</div>
         <div class="screenshot">
             <img ng-src="{{reportData.screenCaptureBase64png}}" alt="Screenshot">
         </div>
@@ -13,7 +13,7 @@
         <input ng-disabled="sendingReport" class="submit" type="submit"
                value="{{sendingReport?text.sending:text.send}}">
     </form>
-    <div ng-show="response">{{response|json}}</div>
+    <div ng-show="response">response</div>
     <div class="social-btns">
         <i class="fa fa-home"></i>
         <i class="fa fa-youtube"></i>

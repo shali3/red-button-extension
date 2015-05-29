@@ -27,6 +27,6 @@ exports.postReport = function (data, success, failure) {
             }
         }).post();
     } else {
-        failure(_("report_limit_error"));
+        failure('reportLimitError');
     }
 };

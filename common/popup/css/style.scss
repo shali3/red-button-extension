@@ -4,10 +4,12 @@
 $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
+$tzar-font: "Almoni Tzar AAA", "Almoni DL AAA", serif;
+$dl-font: "Almoni DL AAA", serif;
 
 html, body {
   min-width: 300px;
-  font-family: "Almoni DL AAA";
+  font-family: $dl-font;
   font-weight: normal;
   font-size: 14pt;
 }
@@ -19,7 +21,7 @@ body[dir="rtl"] {
 }
 
 .header {
-  font-family: "Almoni Tzar AAA", "Almoni DL AAA";
+  font-family: $tzar-font;
   font-weight: 200;
   font-size: 20pt;
   padding: 5px;
@@ -36,7 +38,7 @@ body[dir="rtl"] {
 }
 
 .menu {
-  font-family: "Almoni Tzar AAA", "Almoni DL AAA";
+  font-family: $tzar-font;
   font-weight: 200;
   .menu-item {
     $gradient-grey: darken(white, 20%);
@@ -44,7 +46,7 @@ body[dir="rtl"] {
     cursor: pointer;
     text-align: center;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background: linear-gradient(to bottom, $gradient-grey 0%, #ffffff $gradient-size, #ffffff (100% - $gradient-size), $gradient-grey 100%);
     .icon {
       height: 39px;
@@ -111,8 +113,8 @@ body[dir="rtl"] {
 .report-form {
   text-align: center;
   padding-bottom: 30px;
-  .capture-message {
-    margin-top: 10px;
+  .error-message {
+    color: $header-red;
   }
   .screenshot {
     margin: 20px 0;
@@ -137,7 +139,7 @@ body[dir="rtl"] {
 
   .submit {
     $size: 90px;
-    font-family: "Almoni Tzar AAA", "Almoni DL AAA";
+    font-family: $tzar-font;
     font-weight: 100;
     font-size: 22pt;
     border: none;

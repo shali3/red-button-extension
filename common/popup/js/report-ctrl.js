@@ -22,4 +22,4 @@ function ReportCtrl($scope, backgroundPage) {
             });
     };
 }
-app.controller("ReportCtrl", ReportCtrl);
+app.controller('ReportCtrl', ReportCtrl);
