@@ -1,23 +1,21 @@
-var abstraction = require("./abstraction");
+var reports = require("./reports");
 var Request = require("sdk/request").Request;
 var _ = require("sdk/l10n").get;
 
 exports.postReport = function (data, success, failure) {
-    if (abstraction.canReport()) {
+    if (reports.canReport()) {
         Request({
             url: "http://redbuttonproject.org/ReportHandler.ashx",
-            //url: data.comment.length > 0 ? "http://localhost:8000/test1" : "http://localhost:8000/test2",
             content: data,
             onComplete: function (response) {
-                var reportId = response.text;
-                //trim redundant "
-                if (reportId[0] == '"' && reportId[reportId.length - 1] == '"') {
-                    reportId = reportId.slice(1, reportId.length - 1);
-                }
-
-                console.log('Got Response ' + response.status + ' text: ' + reportId);
+                console.log('Got Response ' + response.status + ' text: ' + response.text);
                 if (response.status == 200) {
-                    abstraction.saveReport(reportId, data.code);
+                    var reportId = response.text;
+                    //trim redundant "
+                    if (reportId[0] == '"' && reportId[reportId.length - 1] == '"') {
+                        reportId = reportId.slice(1, reportId.length - 1);
+                    }
+                    reports.saveReport(reportId, data.code);
                     success(reportId, data.code);
                 }
                 else {

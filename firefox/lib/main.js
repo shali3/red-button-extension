@@ -2,7 +2,7 @@ var buttons = require('sdk/ui/button/toggle');
 var panels = require("sdk/panel");
 var self = require("sdk/self");
 var _ = require("sdk/l10n").get;
-var abstraction = require("./abstraction");
+var reports = require("./reports");
 var tabs = require("sdk/tabs");
 var { setTimeout, clearTimeout } = require("sdk/timers");
 
@@ -42,7 +42,7 @@ function handleChange(state) {
         panel.show({
             position: button
         });
-        var reports = abstraction.getReports();
+        var allReports = reports.getReports();
 
         panel.port.emit('init', {
             screenshot: imageDataUri,
@@ -55,7 +55,7 @@ function handleChange(state) {
                 send_button: _('send_button'),
                 no_report_code: _('no_report_code')
             },
-            reports: reports
+            reports: allReports
         });
         panel.port.on('close', function () {
             handleHide();
