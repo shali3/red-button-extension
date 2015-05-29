@@ -12,7 +12,7 @@ function ReportCtrl($scope, backgroundPage) {
 
     $scope.sendReport = function () {
         $scope.sendingReport = true;
-        backgroundPage.sendReport($scope.reportData).then(function (res) {
+        backgroundPage.sendReport($scope.reportData).then(function (response) {
                 $scope.response = response;
             },
             function (error) {

@@ -14,7 +14,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         },
         function (error) {
             sendResponse({error: error});
-        })
+        });
+    return true;
 });
 
 listeners.notFound = function (data, resolve, reject) {
