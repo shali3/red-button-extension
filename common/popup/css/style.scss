@@ -106,6 +106,7 @@ body[dir="rtl"] {
   text-align: center;
   font-size: 20px;
   .fa {
+    color: $active-tab-background;
     padding: 0 10px;
   }
 }
