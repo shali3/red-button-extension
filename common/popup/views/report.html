@@ -1,7 +1,7 @@
 <div class="report-form">
     <form ng-submit="sendReport()" ng-hide="response">
         <div ng-hide="error" class="capture-message">{{text.screenshotSuccess}}</div>
-        <div ng-show="error" class="error-message">{{text[error]||error.message||error}}</div>
+        <div dir="auto" ng-show="error" class="error-message"> {{error | error}}</div>
         <div class="screenshot">
             <img ng-src="{{reportData.screenCaptureBase64png}}" alt="Screenshot">
         </div>
