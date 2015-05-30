@@ -14,6 +14,7 @@ exports.saveReport = function (id, code) {
         reports = reports.slice(1);
     }
     ss.storage.reports = reports;
+    return myReport;
 };
 
 exports.canReport = function () {
