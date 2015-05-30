@@ -1,6 +1,6 @@
 {
   "name": "red-button",
-  "version": "0.2.1",
+  "version": "v3.0.0-beta",
   "license": "GPL-3.0",
   "engines": {
     "node": ">= 0.10.0"
