@@ -1,5 +1,6 @@
 const { getURI,getTabContentWindow, getActiveTab } = require('sdk/tabs/utils');
 const { getMostRecentBrowserWindow } = require('sdk/window/utils');
+const tabs = require('sdk/tabs');
 
 
 function captureTab() {
@@ -28,8 +29,7 @@ function captureTab() {
 }
 
 function getCurrentURI() {
-    let tab = getActiveTab(getMostRecentBrowserWindow());
-    return getURI(tab);
+    return tabs.activeTab.url;
 }
 
 exports.captureTab = captureTab;
