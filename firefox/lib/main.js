@@ -5,14 +5,11 @@ var _ = require("sdk/l10n").get;
 var tabs = require("sdk/tabs");
 var { setTimeout, clearTimeout } = require("sdk/timers");
 
-var screenshots = require("./screenshot");
-var reports = require("./reports");
 var listeners = require('./listeners');
-var service = require("./service");
 
 var button = buttons.ToggleButton({
     id: "red-button",
-    label: _("product_name"),
+    label: _("productName"),
     icon: {
         "16": "./images/icons/16.png",
         "32": "./images/icons/32.png",

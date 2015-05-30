@@ -5,6 +5,7 @@
 var tabs = require("sdk/tabs");
 var screenshots = require("./screenshot");
 var reports = require("./reports");
+var service = require("./service");
 
 
 exports.openReport = function (data) {
