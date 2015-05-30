@@ -3,16 +3,27 @@
  */
 'use strict';
 function backgroundPageDev($q) {
-    this.onScreenshot = function (callback) {
-        callback('http://media.al.com/live/photo/gulf-shores-website-screenshot-1c58200629ad5efb.jpg');
+
+
+    this.getScreenshot = function () {
+        return $q(function (resolve) {
+            resolve('http://media.al.com/live/photo/gulf-shores-website-screenshot-1c58200629ad5efb.jpg');
+        });
     };
-    this.onTabUrl = function (callback) {
-        callback('http://www.google.com');
+
+    this.getTabUrl = function () {
+        return $q(function (resolve) {
+            resolve('http://www.google.com');
+        });
     };
-    this.onReports = function (callback) {
-        callback(null);
+
+    this.getReports = function () {
+        return $q(function (resolve) {
+            resolve([]);
+        });
+        return sendMessage('getReports');
     };
-    this.sendClose = function () {
+    this.closePopup = function () {
         console.log('closeCalled');
     };
     this.sendReport = function (reportData) {
@@ -26,6 +37,8 @@ function backgroundPageDev($q) {
             }
         });
     };
+
+
 }
 
 app.service('backgroundPage', backgroundPageDev);

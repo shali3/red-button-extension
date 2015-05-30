@@ -2,11 +2,12 @@ var buttons = require('sdk/ui/button/toggle');
 var panels = require("sdk/panel");
 var self = require("sdk/self");
 var _ = require("sdk/l10n").get;
-var reports = require("./reports");
 var tabs = require("sdk/tabs");
 var { setTimeout, clearTimeout } = require("sdk/timers");
 
 var screenshots = require("./screenshot");
+var reports = require("./reports");
+var listeners = require('./listeners');
 var service = require("./service");
 
 var button = buttons.ToggleButton({
@@ -25,15 +26,10 @@ var panel;
 function handleChange(state) {
     if (state.checked) {
 
-        var imageDataUri = screenshots.captureTab();
-        var tabUri = screenshots.getCurrentURI();
-
         const panelWidth = 350;
         panel = panels.Panel({
-            contentURL: self.data.url("popup/index.html"),
-            contentScriptFile: [
-                self.data.url("js/page-script.js")
-            ],
+            contentURL: './popup/index.html',
+            contentScriptFile: ['./js/popup-messaging.js'],
             width: panelWidth,
             height: 600,
             onHide: handleHide
@@ -42,58 +38,37 @@ function handleChange(state) {
         panel.show({
             position: button
         });
-        var allReports = reports.getReports();
 
-        panel.port.emit('init', {
-            screenshot: imageDataUri,
-            tabUrl: tabUri,
-            strings: {
-                comment_field_placeholder: _('comment_field_placeholder'),
-                passcode_placeholder: _('passcode_placeholder'),
-                close_button: _('close_button'),
-                sending: _('sending'),
-                send_button: _('send_button'),
-                no_report_code: _('no_report_code')
-            },
-            reports: allReports
-        });
-        panel.port.on('close', function () {
-            handleHide();
-        });
-        panel.port.on('heightChanged', function (height) {
-            panel.resize(panelWidth, height + 20);
-        });
+        panel.port.on('message', function (request) {
+            if (request.message && listeners[request.message]) {
+                var listener = listeners[request.message];
 
-        panel.port.on('postReport', function (report) {
-            service.postReport(report, function (response) {
-                panel.port.emit('postReportSuccess', response);
-                if (report.code) {
-                    setTimeout(function () {
-                        tabs.open({url: 'http://redbutton.org.il/casenumberintro?id=' + response + '&code=' + report.code + ''});
-                    }, 3000);
-                }
-            }, function (error) {
-                panel.port.emit('postReportError', error);
-            });
-        });
-        panel.port.on('viewReport', function (report) {
-            tabs.open({
-                url: "http://redbutton.org.il/redbuttonstatus/",
-                onReady: function (tab) {
-                    tab.attach({
-                        contentScriptFile: [
-                            self.data.url("js/ext/jquery-2.1.3.min.js"),
-                            self.data.url("js/content-script.js")
-                        ],
-                        contentScriptOptions: report
+                listener(request.data, function (data) {
+                        sendResponse(request.id, data);
+                    },
+                    function (error) {
+                        sendError(request.id, error);
                     });
-                }
-            });
+            }
+            else {
+                sendError(request.id, request.message ? 'Message Not Found' : 'Message should be specified');
+            }
         })
     }
 }
 
-function handleHide() {
+listeners.close = handleHide;
+
+function sendResponse(id, data) {
+    panel.port.emit('response', {id: id, data: data});
+}
+
+function sendError(id, error) {
+    panel.port.emit('response', {id: id, error: error});
+}
+
+function handleHide(data, resolve) {
     button.state('window', {checked: false});
     panel.destroy();
+    resolve();
 }

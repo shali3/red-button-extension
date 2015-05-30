@@ -3,24 +3,30 @@
  */
 'use strict';
 function backgroundPageChrome($rootScope, $window, $q) {
-    this.onScreenshot = function (callback) {
-        chrome.tabs.captureVisibleTab(null, {"format": "png"}, function (screenshot) {
-            callback(screenshot);
-            $rootScope.$apply();
+    this.getScreenshot = function () {
+        return $q(function (resolve) {
+            chrome.tabs.captureVisibleTab(null, {"format": "png"}, function (screenshot) {
+                resolve(screenshot);
+                $rootScope.$apply();
 
+            });
         });
     };
-    this.onTabUrl = function (callback) {
-        chrome.tabs.getSelected(null, function (tab) {
-            callback(tab.url);
+    this.getTabUrl = function () {
+        return $q(function (resolve) {
+            chrome.tabs.getSelected(null, function (tab) {
+                resolve(tab.url);
+                $rootScope.$apply();
+            });
         });
     };
-    this.onReports = function (callback) {
-        callback(null);
-    };
-    this.sendClose = function () {
 
+    this.closePopup = function () {
         $window.close();
+    };
+
+    this.getReports = function () {
+        return sendMessage('getReports', reportData);
     };
     this.sendReport = function (reportData) {
         return sendMessage('postReport', reportData);

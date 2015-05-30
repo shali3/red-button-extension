@@ -23,6 +23,6 @@ function MenuCtrl($scope, $rootScope, backgroundPage) {
     setMenuItems();
     $rootScope.$watch('text', setMenuItems);
 
-    $scope.close = backgroundPage.sendClose;
+    $scope.close = backgroundPage.closePopup;
 }
 app.controller('MenuCtrl', MenuCtrl);

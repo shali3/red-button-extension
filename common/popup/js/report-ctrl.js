@@ -2,11 +2,11 @@ function ReportCtrl($scope, backgroundPage) {
 
     $scope.sendingReport = false;
     $scope.reportData = {};
-    backgroundPage.onScreenshot(function (screenshot) {
+    backgroundPage.getScreenshot().then(function (screenshot) {
         $scope.reportData.screenCaptureBase64png = screenshot;
     });
 
-    backgroundPage.onTabUrl(function (url) {
+    backgroundPage.getTabUrl().then(function (url) {
         $scope.reportData.uri = url;
     });
 

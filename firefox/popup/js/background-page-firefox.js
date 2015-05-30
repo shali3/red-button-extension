@@ -3,79 +3,83 @@
  */
 'use strict';
 function backgroundPageFirefox($window, $rootScope, $q) {
-    var latestData = {},
-        callbacks = {},
-        sendReportDefer;
+    var defers = {},
+        loaded = false,
+        pendingRequests = [];
 
-    function raiseEvent(event) {
-        if (event.data && event.data.from === 'script') {
-            var message = event.data.message;
-            var data = event.data.data;
-            latestData[message] = data;
-            if (callbacks[message]) {
-                if (callbacks[message]) {
-                    callbacks[message](data);
-                    $rootScope.$apply();
-                }
-            }
-        }
-    }
+    $window.addEventListener('message', onResponse);
 
 
-    function registerEventOnce(eventName, callback) {
-        callbacks[eventName] = function (data) {
-            delete callbacks[eventName];
-            callback(data);
-        }
-    }
-
-    function registerEvent(eventName, callback) {
-        if (latestData[eventName]) {
-
-            if (callback) {
-                callback(latestData[eventName]);
-            }
-        }
-        callbacks[eventName] = callback;
-    }
-
-    function sendMessage(messageName, data) {
-        $window.postMessage({from: 'app', message: messageName, data: data}, $window.location.origin);
-    }
-
-    this.registerEventListerner = function () {
-        $window.addEventListener('message', raiseEvent);
+    this.getScreenshot = function () {
+        return sendMessage('getScreenshot');
     };
 
-    this.onScreenshot = function (callback) {
-        registerEvent('screenshot', callback);
+    this.getTabUrl = function () {
+        return sendMessage('getTabUrl');
     };
-    this.onTabUrl = function (callback) {
-        registerEvent('tabUrl', callback);
+
+    this.getReports = function () {
+        return sendMessage('getReports');
     };
-    this.onReports = function (callback) {
-        registerEvent('reports', callback);
-    };
-    this.sendClose = function () {
+
+    this.closePopup = function () {
         sendMessage('close');
     };
     this.sendReport = function (reportData) {
-        if (sendReportDefer) return $q(function (resolve, reject) {
-            reject('Another report is in progress');
-        });
-        sendReportDefer = $q.defer();
-        sendReportDefer.promise.finally(function () {
-            sendReportDefer = null;
-        });
-        registerEventOnce('postReportSuccess', sendReportDefer.resolve);
-        registerEventOnce('postReportError', sendReportDefer.reject);
+        return sendMessage('postReport', reportData);
+    };
 
-        sendMessage('postReport',reportData);
-        return sendReportDefer.promise;
+
+    function guid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    function sendMessage(messageName, data) {
+        var deferred = $q.defer();
+        var id = guid();
+        defers[id] = deferred;
+        var message = {from: 'app', id: id, message: messageName, data: data};
+        if (loaded) {
+            $window.postMessage(message, $window.location.origin);
+        }
+        else {
+            pendingRequests.push(message);
+        }
+
+        return deferred.promise;
+    }
+
+    function onResponse(event) {
+        var data = event.data;
+        if (data && data.from === 'script') {
+            if (loaded) {
+                var response = data.response;
+                var deferred = defers[response.id];
+                if (response.error) {
+                    deferred.reject(response.error)
+                }
+                else {
+                    deferred.resolve(response.data);
+                }
+                $rootScope.$apply();
+                delete defers[id];
+            }
+            else {
+                loaded = true;
+                flushPendingRequest();
+            }
+        }
+    }
+
+    function flushPendingRequest() {
+        angular.forEach(pendingRequests, function (message) {
+            $window.postMessage(message, $window.location.origin);
+        });
+        pendingRequests = null;
     }
 }
 
 app.service('backgroundPage', backgroundPageFirefox);
-app.run(function (backgroundPage) {
-    backgroundPage.registerEventListerner();
-});
