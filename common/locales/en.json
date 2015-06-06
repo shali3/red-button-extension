@@ -14,5 +14,8 @@
   "reportStatusLink": "Check Reports Status",
   "sending": "Sending...",
   "close": "Close",
-  "send": "Send"
+  "send": "Send",
+  "reportOpeningDate": "Open Date",
+  "reportId": "Report ID",
+  "reportStatus": "Status"
 }
