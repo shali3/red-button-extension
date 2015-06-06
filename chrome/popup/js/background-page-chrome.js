@@ -26,7 +26,7 @@ function backgroundPageChrome($rootScope, $window, $q) {
     };
 
     this.getReports = function () {
-        return sendMessage('getReports', reportData);
+        return sendMessage('getReports');
     };
     this.sendReport = function (reportData) {
         return sendMessage('postReport', reportData);
@@ -39,6 +39,7 @@ function backgroundPageChrome($rootScope, $window, $q) {
                     resolve(response.data);
                 }
                 else {
+                    console.error('Error in message ' + message, response.error);
                     reject(response.error);
                 }
             });

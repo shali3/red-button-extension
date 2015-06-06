@@ -10,7 +10,8 @@ var app = angular.module('app', ['ui.bootstrap', 'ui.router'])
             })
             .state('myReports', {
                 url: '/my-reports',
-                templateUrl: 'views/my-reports.html'
+                templateUrl: 'views/my-reports.html',
+                controller: 'MyReportsCtrl'
             })
             .state('heroes', {
                 url: '/heroes',

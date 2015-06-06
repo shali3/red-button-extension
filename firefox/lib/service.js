@@ -4,27 +4,37 @@ var Request = require("sdk/request").Request;
 exports.postReport = postReport;
 function postReport(data, resolve, reject) {
     if (reports.canReport()) {
-        Request({
-            url: "http://redbuttonproject.org/ReportHandler.ashx",
-            content: data,
-            onComplete: function (response) {
-                console.log('Got Response ' + response.status + ' text: ' + response.text);
-                if (response.status == 200) {
-                    var reportId = cleanReportId(response.text);
-                    var myReport = reports.saveReport(reportId, data.code);
-                    resolve(myReport);
-                }
-                else {
-                    var text = response.text ? response.status + ':' + response.text : response.status;
-                    reject(text);
-                }
+        postImage(data.screenCaptureBase64png, function (imageUrl) {
+            data.screenCaptureBase64png = imageUrl;
+            if (!data.reportCode) {
+                data.reportCode = Math.floor(Math.random() * 90000) + 10000;
             }
-        }).post();
+            Request({
+                url: "http://redbuttonproject.org/ReportHandler.ashx",
+                content: data,
+                onComplete: function (response) {
+                    console.log('Got Response ' + response.status + ' text: ' + response.text);
+                    if (response.status == 200) {
+                        var reportId = cleanReportId(response.text);
+                        var myReport = reports.saveReport(reportId, data.code, imageUrl);
+                        resolve(myReport);
+                    }
+                    else {
+                        var text = response.text ? response.status + ':' + response.text : response.status;
+                        reject(text);
+                    }
+                }
+            }).post();
+        }, reject);
+
     } else {
         reject('reportLimitError');
     }
 }
 
+function postImage(imageData, resolve, reject) {
+    resolve(imageData);
+}
 
 /**
  * Cleans the rundundant " signs in the response

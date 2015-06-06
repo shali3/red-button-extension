@@ -4,7 +4,7 @@
 'use strict';
 function errorFilter($rootScope) {
     return function (error) {
-        return $rootScope.text[error] || error.message || error.responseText || error;
+        return error ? $rootScope.text[error] || error.message || error.responseText || error : "Empty Error";
     };
 }
 app.filter('error', errorFilter);

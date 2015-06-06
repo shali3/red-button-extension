@@ -19,6 +19,7 @@
   "background": {
     "scripts": [
       "jquery.min.js",
+      "parse.min.js",
       "background.js"
     ]
   },

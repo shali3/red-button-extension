@@ -1,5 +1,5 @@
 var ss = require("sdk/simple-storage");
-exports.saveReport = function (id, code) {
+exports.saveReport = function (id, code, imageUrl) {
     var reports = ss.storage.reports;
     if (!reports)
         reports = [];
@@ -7,6 +7,7 @@ exports.saveReport = function (id, code) {
     var myReport = {
         reportID: id,
         reportCode: code,
+        screenshot: imageUrl,
         time: new Date().getTime()
     };
     reports.push(myReport);
