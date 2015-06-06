@@ -1,19 +1,22 @@
 <div class="my-reports">
     <div class="no-reports" ng-show="reports && reports.length === 0">{{text.noReportsMessage}}</div>
-    <div class="report-item" ng-repeat="report in reports">
+    <div class="report-item"
+         ng-repeat="report in reports"
+         ng-class="{closed:openedItem !== $index}"
+         ng-click="$parent.openedItem = $index">
         <div class="screenshot">
             <img ng-src="{{report.imageUrl}}" alt="Screenshot">
         </div>
         <table>
-            <tr>
+            <tr class="create-date">
                 <td>{{text.reportOpeningDate}}</td>
                 <td>{{report.time | date:'shortDate'}}</td>
             </tr>
-            <tr>
+            <tr class="report-id">
                 <td>{{text.reportId}}</td>
                 <td>{{report.reportID}}</td>
             </tr>
-            <tr>
+            <tr class="status">
                 <td>{{text.reportStatus}}</td>
                 <td>{{report.status}}</td>
             </tr>

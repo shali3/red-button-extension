@@ -49,6 +49,6 @@ exports.getReports = function (callback) {
                 report.reportCode = null;
             }
         });
-        callback(reports);
+        callback(reports.reverse());
     });
 };

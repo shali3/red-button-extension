@@ -1,5 +1,6 @@
 @import "fonts";
 @import "angular-csp";
+@import "rtl";
 
 $active-tab-background: #002832;
 $header-red: #E63E2E;
@@ -9,16 +10,10 @@ $tzar-font: "Almoni Tzar AAA", "Almoni DL AAA", serif;
 $dl-font: "Almoni DL AAA", serif;
 
 html, body {
-  min-width: 300px;
+  min-width: 320px;
   font-family: $dl-font;
   font-weight: normal;
   font-size: 14pt;
-}
-
-body[dir="rtl"] {
-  .menu-item {
-    float: right;
-  }
 }
 
 .header {
@@ -117,15 +112,27 @@ body[dir="rtl"] {
 }
 
 .report-item {
+  $time: 0.3s;
+  position: relative;
+  &, * {
+    -webkit-transition: all $time ease;
+    -moz-transition: all $time ease;
+    transition: all $time ease;
+  }
   border: 1px solid grey;
   border-radius: 5px;
-  padding: 20px 0;
+  padding: 170px 0 20px;
+
   margin-bottom: 20px;
   background-color: #ffffff;
   .screenshot {
+    position: absolute;
     background-color: $image-background;
     height: 150px;
+    width: 100%;
     text-align: center;
+    top: 20px;
+    right: 0;
 
     img {
       height: 150px;
@@ -146,11 +153,32 @@ body[dir="rtl"] {
   .extra-message {
     padding: 0 20px;
   }
+
+  &.closed {
+    padding: 20px 70px 20px 0;
+
+    .screenshot {
+      height: 50px;
+      width: 70px;
+      margin: 0;
+
+      img {
+        height: 50px;
+      }
+    }
+
+    .create-date, .report-id {
+      display: none;
+    }
+  }
 }
 
 .report-form {
   text-align: center;
-  padding: 30px 0;
+  padding-top: 10px;
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 30px;
   .error-message {
     color: $header-red;
   }

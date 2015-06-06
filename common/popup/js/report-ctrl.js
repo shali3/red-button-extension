@@ -1,4 +1,4 @@
-function ReportCtrl($scope, backgroundPage) {
+function ReportCtrl($scope,$state, backgroundPage) {
 
     $scope.sendingReport = false;
     $scope.reportData = {};
@@ -13,7 +13,8 @@ function ReportCtrl($scope, backgroundPage) {
     $scope.sendReport = function () {
         $scope.sendingReport = true;
         backgroundPage.sendReport($scope.reportData).then(function (response) {
-                $scope.response = response;
+                //$scope.response = response;
+                $state.go('myReports');
             },
             function (error) {
                 $scope.error = error;

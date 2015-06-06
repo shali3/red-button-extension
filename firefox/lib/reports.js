@@ -40,5 +40,5 @@ exports.getReports = function () {
             report.reportCode = null;
         }
     });
-    return reports;
+    return reports.reverse();
 };
