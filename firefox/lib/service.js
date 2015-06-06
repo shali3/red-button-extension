@@ -6,8 +6,8 @@ function postReport(data, resolve, reject) {
     if (reports.canReport()) {
         postImage(data.screenCaptureBase64png, function (imageUrl) {
             data.screenCaptureBase64png = imageUrl;
-            if (!data.reportCode) {
-                data.reportCode = Math.floor(Math.random() * 90000) + 10000;
+            if (!data.code) {
+                data.code = Math.floor(Math.random() * 90000) + 10000;
             }
             Request({
                 url: "http://redbuttonproject.org/ReportHandler.ashx",
