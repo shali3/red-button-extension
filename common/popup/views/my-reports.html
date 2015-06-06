@@ -1,2 +1,23 @@
-<h1>My Reports</h1>
-<div class="report-item" ng-repeat="report in reports">{{report|json}}</div>
+<div class="my-reports">
+    <div class="no-reports" ng-show="reports && reports.length === 0">{{text.noReportsMessage}}</div>
+    <div class="report-item" ng-repeat="report in reports">
+        <div class="screenshot">
+            <img ng-src="{{report.imageUrl}}" alt="Screenshot">
+        </div>
+        <table>
+            <tr>
+                <td>{{text.reportOpeningDate}}</td>
+                <td>{{report.time | date:'shortDate'}}</td>
+            </tr>
+            <tr>
+                <td>{{text.reportId}}</td>
+                <td>{{report.reportID}}</td>
+            </tr>
+            <tr>
+                <td>{{text.reportStatus}}</td>
+                <td>{{report.status}}</td>
+            </tr>
+        </table>
+        <div class="extra-message">Some Extra Message</div>
+    </div>
+</div>

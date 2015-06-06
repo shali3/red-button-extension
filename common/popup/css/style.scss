@@ -4,6 +4,7 @@
 $active-tab-background: #002832;
 $header-red: #E63E2E;
 $image-background: darken(white, 20%);
+$reports-bg-color: #F2F2F2;
 $tzar-font: "Almoni Tzar AAA", "Almoni DL AAA", serif;
 $dl-font: "Almoni DL AAA", serif;
 
@@ -46,7 +47,6 @@ body[dir="rtl"] {
     cursor: pointer;
     text-align: center;
     padding: 10px;
-    margin-bottom: 20px;
     background: linear-gradient(to bottom, $gradient-grey 0%, #ffffff $gradient-size, #ffffff (100% - $gradient-size), $gradient-grey 100%);
     .icon {
       height: 39px;
@@ -111,9 +111,46 @@ body[dir="rtl"] {
   }
 }
 
+.my-reports {
+  background-color: $reports-bg-color;
+  padding: 20px 5px;
+}
+
+.report-item {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  .screenshot {
+    background-color: $image-background;
+    height: 150px;
+    text-align: center;
+
+    img {
+      height: 150px;
+      max-width: 100%;
+    }
+  }
+  table {
+    width: 100%;
+    tr {
+      margin-bottom: 20px;
+      td:first-child {
+        padding: 5px 20px;
+        text-align: end;
+        width: 150px;
+      }
+    }
+  }
+  .extra-message {
+    padding: 0 20px;
+  }
+}
+
 .report-form {
   text-align: center;
-  padding-bottom: 30px;
+  padding: 30px 0;
   .error-message {
     color: $header-red;
   }
