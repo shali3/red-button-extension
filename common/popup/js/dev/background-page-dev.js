@@ -19,9 +19,26 @@ function backgroundPageDev($q) {
 
     this.getReports = function () {
         return $q(function (resolve) {
-            resolve([]);
+            resolve([
+                {
+                    "reportID": "00011202",
+                    "time": 1432979206051,
+                    "reportCode": null,
+                    imageUrl: 'http://media.al.com/live/photo/gulf-shores-website-screenshot-1c58200629ad5efb.jpg'
+                },
+                {
+                    "reportID": "00011204",
+                    "time": 1432984401413,
+                    "reportCode": null,
+                    imageUrl: 'http://media.al.com/live/photo/gulf-shores-website-screenshot-1c58200629ad5efb.jpg'
+                },
+                {
+                    "reportID": "00011209",
+                    "time": 1432995922648,
+                    "reportCode": null,
+                    imageUrl: 'http://media.al.com/live/photo/gulf-shores-website-screenshot-1c58200629ad5efb.jpg'
+                }]);
         });
-        return sendMessage('getReports');
     };
     this.closePopup = function () {
         console.log('closeCalled');
