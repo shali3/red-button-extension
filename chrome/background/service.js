@@ -22,8 +22,7 @@ function postReport(data, resolve, reject) {
                     processData: false,
                     success: function (response) {
                         var reportId = cleanReportId(response);
-                        var myReport = reports.saveReport(reportId, data.code, imageUrl);
-                        resolve(myReport);
+                        reports.saveReport(reportId, data.code, imageUrl, resolve);
                     },
                     error: reject
                 });
@@ -37,7 +36,7 @@ function postReport(data, resolve, reject) {
 }
 function getReportStatus(report, resolve, reject) {
     // StatusHandler.ashx (caseID=00XX code=passcode) [date, case number, staus body, url, reason for closing]
-    if (false) {
+    if (report.reportCode) {
         var data = {
             caseID: report.reportID,
             code: report.reportCode

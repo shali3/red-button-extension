@@ -1,4 +1,4 @@
-exports.saveReport = function (id, code, imageUrl) {
+exports.saveReport = function (id, code, imageUrl, resolve) {
     var myReport = {
         reportID: id,
         reportCode: code,
@@ -15,10 +15,10 @@ exports.saveReport = function (id, code, imageUrl) {
             reports = reports.slice(1);
         }
 
-        chrome.storage.local.set({'reports': reports});
+        chrome.storage.local.set({'reports': reports},function(){
+            resolve(myReport);
+        });
     });
-
-    return myReport;
 };
 
 exports.canReport = function (callback) {
