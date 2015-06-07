@@ -143,7 +143,11 @@ html, body {
     width: 100%;
     text-align: center;
     top: 20px;
-    right: 0;
+    left: 0;
+    body[dir="rtl"] & {
+      right: 0;
+      left: inherit;
+    }
 
     img {
       height: 150px;
@@ -165,8 +169,10 @@ html, body {
   }
 
   &.closed {
-    padding: 20px 70px 20px 0;
-
+    padding: 20px 0 20px 70px;
+    body[dir="rtl"] & {
+      padding: 20px 70px 20px 0;
+    }
     .screenshot {
       height: 50px;
       width: 70px;
@@ -199,7 +205,8 @@ html, body {
 .error-message {
   color: $header-red;
 }
-.coming-soon{
+
+.coming-soon {
   text-align: center;
 }
 

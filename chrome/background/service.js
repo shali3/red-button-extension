@@ -37,7 +37,7 @@ function postReport(data, resolve, reject) {
 }
 function getReportStatus(report, resolve, reject) {
     // StatusHandler.ashx (caseID=00XX code=passcode) [date, case number, staus body, url, reason for closing]
-    if (report.reportCode) {
+    if (false) {
         var data = {
             caseID: report.reportID,
             code: report.reportCode

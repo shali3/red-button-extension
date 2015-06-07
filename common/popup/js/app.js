@@ -20,9 +20,15 @@ var app = angular.module('app', ['ui.bootstrap', 'ui.router'])
     })
     .run(function ($rootScope, $http) {
         $rootScope.text = {};
-        $http.get('locales/he.json').success(function (data) {
-            $rootScope.text = data;
-        }).error(function (error) {
-            $rootScope.text = {productName: error};
-        });
+        $rootScope.locale = 'he';
+        function fetchLocale(locale) {
+            $http.get('locales/' + locale + '.json').success(function (data) {
+                $rootScope.text = data;
+            }).error(function (error) {
+                $rootScope.text = {productName: error};
+            });
+        }
+
+        fetchLocale($rootScope.locale);
+        $rootScope.$watch('locale', fetchLocale);
     });

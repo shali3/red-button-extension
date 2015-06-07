@@ -1,5 +1,7 @@
 {
   "direction": "rtl",
+  "start":"right",
+  "end":"left",
   "productName": "הכפתור האדום",
   "productDescription": "הגשת תלונות נגד אלימות ברשת",
   "reportTab": "דיווח",

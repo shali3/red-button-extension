@@ -18,12 +18,15 @@
         <span>{{text.productName}}</span>
         <button type="button"
                 class="close"
-                tooltip-placement="left"
+                tooltip-placement="{{text.start}}"
                 tooltip="{{text.close}}"
                 ng-click="close()"
                 aria-label="{{text.close}}">
             <span aria-hidden="true">&times;</span>
         </button>
+
+        <img class="locale-btn pull-right" ng-hide="locale === 'en'" ng-click="setLocale('en')" src="images/usa.png">
+        <img class="locale-btn pull-left" ng-hide="locale === 'he'" ng-click="setLocale('he')" src="images/israel.png">
     </div>
     <div class="menu clearfix">
         <div class="menu-item col-xs-4"

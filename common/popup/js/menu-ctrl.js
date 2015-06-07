@@ -24,5 +24,8 @@ function MenuCtrl($scope, $rootScope, backgroundPage) {
     $rootScope.$watch('text', setMenuItems);
 
     $scope.close = backgroundPage.closePopup;
+    $scope.setLocale = function (locale) {
+        $rootScope.locale = locale;
+    }
 }
 app.controller('MenuCtrl', MenuCtrl);

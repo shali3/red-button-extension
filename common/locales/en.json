@@ -1,5 +1,7 @@
 {
   "direction": "ltr",
+  "start":"left",
+  "end":"right",
   "productName": "The Red Button",
   "productDescription": "The Red Button - Fighting Cyberbulling",
   "reportTab": "Report",
