@@ -12,9 +12,6 @@ exports.getReports = function (data, resolve, reject) {
             service.getReportStatus(report, function (res) {
                 if (report !== res) {
                     cleanReportStatus(res);
-                    res.PubStatus = 'A mesdlf sdflkg dsflkgj dsflkg';
-                    res.SystemMessage = 'A messdfsdf sdfsdfs sdads sdfsddlf sdflkg dsflkgj dsflkg';
-
                     report.status = res;
                     console.log(res);
                 }
