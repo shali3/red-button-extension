@@ -19,6 +19,6 @@
   "reportId": "מספר תלונה",
   "reportStatus": "סטטוס",
   "loadingReportList": "טוען דיווחים",
-  "failedLoadingReports" : "אירעה שגיאה בקבלת הדיווחים"
-
+  "failedLoadingReports": "אירעה שגיאה בקבלת הדיווחים",
+  "comingSoon": "בקרוב..."
 }
