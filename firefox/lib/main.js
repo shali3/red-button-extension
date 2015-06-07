@@ -37,7 +37,10 @@ function handleChange(state) {
         });
 
         panel.port.on('message', function (request) {
-            if (request.message && listeners[request.message]) {
+            if (request.message === 'close') {
+                handleHide();
+            }
+            else if (request.message && listeners[request.message]) {
                 var listener = listeners[request.message];
 
                 listener(request.data, function (data) {
@@ -54,7 +57,6 @@ function handleChange(state) {
     }
 }
 
-listeners.close = handleHide;
 
 function sendResponse(id, data) {
     panel.port.emit('response', {id: id, data: data});
@@ -64,10 +66,7 @@ function sendError(id, error) {
     panel.port.emit('response', {id: id, error: error});
 }
 
-function handleHide(data, resolve) {
+function handleHide() {
     button.state('window', {checked: false});
     panel.destroy();
-    if (resolve) {
-        resolve();
-    }
 }
