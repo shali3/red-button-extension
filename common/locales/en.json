@@ -17,5 +17,7 @@
   "send": "Send",
   "reportOpeningDate": "Open Date",
   "reportId": "Report ID",
-  "reportStatus": "Status"
+  "reportStatus": "Status",
+  "loadingReportList": "Loading the latest report status",
+  "failedLoadingReports" : "Failed loading reports"
 }

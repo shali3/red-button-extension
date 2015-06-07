@@ -1,34 +1,44 @@
 <div class="my-reports">
+    <div class="reports-loading" ng-show="loading">
+        <h1>{{text.loadingReportList}}</h1>
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+    </div>
+    <div class="error-message" ng-show="!loading && error">
+        <h1>{{text.failedLoadingReports}}</h1>
+        {{error|error}}
+    </div>
     <div class="no-reports" ng-show="reports && reports.length === 0">{{text.noReportsMessage}}</div>
-    <div class="report-item"
-         ng-repeat="report in reports"
-         ng-class="{closed:openedItem !== $index}"
-         ng-click="$parent.openedItem = $index">
-        <div class="screenshot">
-            <img ng-src="{{report.screenshot}}" alt="Screenshot">
-        </div>
-        <table>
-            <tr class="status-mini" ng-hide="openedItem === $index">
-                <td>{{text.reportStatus}}</td>
-                <td><span class="report-status">{{report.status.Status}}</span></td>
-            </tr>
-            <tr class="create-date">
-                <td>{{text.reportOpeningDate}}</td>
-                <td>{{report.time | date:'shortDate'}}</td>
-            </tr>
-            <tr class="report-id">
-                <td>{{text.reportId}}</td>
-                <td>{{report.reportID}}</td>
-            </tr>
-            <tr class="status" ng-show="openedItem === $index">
-                <td>{{text.reportStatus}}</td>
-                <td>
-                    <span class="report-status">{{report.status.Status}}</span>
+    <div class="report-items">
+        <div class="report-item"
+             ng-repeat="report in reports"
+             ng-class="{closed:openedItem !== $index}"
+             ng-click="$parent.openedItem = $index">
+            <div class="screenshot">
+                <img ng-src="{{report.screenshot}}" alt="Screenshot">
+            </div>
+            <table>
+                <tr class="status-mini" ng-hide="openedItem === $index">
+                    <td>{{text.reportStatus}}</td>
+                    <td><span class="report-status">{{report.status.Status}}</span></td>
+                </tr>
+                <tr class="create-date">
+                    <td>{{text.reportOpeningDate}}</td>
+                    <td>{{report.time | date:'shortDate'}}</td>
+                </tr>
+                <tr class="report-id">
+                    <td>{{text.reportId}}</td>
+                    <td>{{report.reportID}}</td>
+                </tr>
+                <tr class="status" ng-show="openedItem === $index">
+                    <td>{{text.reportStatus}}</td>
+                    <td>
+                        <span class="report-status">{{report.status.Status}}</span>
 
-                    <p ng-show="report.status.PubStatus">{{report.status.PubStatus}}</p>
-                </td>
-            </tr>
-        </table>
-        <div class="extra-message" ng-show="openedItem === $index">{{report.status.SystemMessage}}</div>
+                        <p ng-show="report.status.PubStatus">{{report.status.PubStatus}}</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="extra-message" ng-show="openedItem === $index">{{report.status.SystemMessage}}</div>
+        </div>
     </div>
 </div>

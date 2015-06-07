@@ -17,6 +17,8 @@
   "send": "שלח",
   "reportOpeningDate": "תאריך פתיחה",
   "reportId": "מספר תלונה",
-  "reportStatus": "סטטוס"
+  "reportStatus": "סטטוס",
+  "loadingReportList": "טוען דיווחים",
+  "failedLoadingReports" : "אירעה שגיאה בקבלת הדיווחים"
 
 }
