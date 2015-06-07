@@ -2,25 +2,19 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+
     <title>The Red Button for Firefox</title>
 
 </head>
-<body style="text-align: center;background-color: lightgray">
-<div id="firefox">
-    <h1>To install the addon click the link bellow
-    </h1>
+<body style="text-align: center;">
+<h1>The Red button browser extension </h1>
 
-    <h2>
-        <a href="red-button.xpi">Install</a>
-    </h2>
-</div>
-<div id="not-firefox">
-    <h1>Please navigate to this page using Firefox</h1>
-</div>
-<script type="text/javascript">
-    var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-    document.getElementById('firefox').style.display = is_firefox ? 'block' : 'none';
-    document.getElementById('not-firefox').style.display = !is_firefox ? 'block' : 'none';
-</script>
+<a href="red-button.xpi"><img src="http://www.actsofvolition.com/images/firefox_icon.png"></a>
+<a href="red-button.crx"><img src="http://blog.josedacruz.com/wp-content/uploads/2014/10/chrome-logo.png"></a>
+
+<h3><a href="https://youtu.be/mWIpfsdA0DY?t=1m9s">How to install the extention on Chrome (Youtube)</a></h3>
 </body>
 </html>
