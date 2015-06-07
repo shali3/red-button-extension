@@ -11,7 +11,7 @@ $dl-font: "Almoni DL AAA", serif;
 
 html, body {
   min-width: 320px;
-  min-height: 600px;
+  min-height: 500px;
   font-family: $dl-font;
   font-weight: normal;
   font-size: 14pt;
@@ -109,6 +109,8 @@ html, body {
 
 .my-reports {
   padding: 20px 5px;
+  background-color: $reports-bg-color;
+
 
   .reports-loading {
     text-align: center;
@@ -116,10 +118,6 @@ html, body {
       color: $header-red
     }
   }
-}
-
-.report-items {
-  background-color: $reports-bg-color;
 }
 
 .report-item {
