@@ -27,11 +27,11 @@ exports.openReport = function (data) {
 exports.postReport = function (data, resolve, reject) {
     service.postReport(data, function (report) {
         resolve(report);
-        if (report.code) {
-            setTimeout(function () {
-                tabs.open({url: 'http://redbutton.org.il/casenumberintro?id=' + response + '&code=' + report.code + ''});
-            }, 3000);
-        }
+        //if (report.code) {
+        //    setTimeout(function () {
+        //        tabs.open({url: 'http://redbutton.org.il/casenumberintro?id=' + response + '&code=' + report.code + ''});
+        //    }, 3000);
+        //}
     }, reject);
 };
 
@@ -43,7 +43,33 @@ exports.getTabUrl = function (data, resolve) {
     resolve(screenshots.getCurrentURI());
 };
 
-exports.getReports = function (data, resolve) {
-    resolve(reports.getReports());
+exports.getReports = function (data, resolve, reject) {
+    var allReports = reports.getReports();
+
+    var count = 0;
+    allReports.forEach(function (report) {
+        service.getReportStatus(report, function (res) {
+            if (report !== res) {
+                cleanReportStatus(res);
+                res.PubStatus = 'A mesdlf sdflkg dsflkgj dsflkg';
+                res.SystemMessage = 'A messdfsdf sdfsdfs sdads sdfsddlf sdflkg dsflkgj dsflkg';
+
+                report.status = res;
+                console.log(res);
+            }
+            count++;
+            if (count === allReports.length) {
+                resolve(allReports);
+            }
+        }, reject);
+    });
 };
 
+function cleanReportStatus(rs) {
+    delete  rs.Body;
+    delete  rs.BodyLength;
+    delete  rs.CaseNumber;
+    delete  rs.ContentType;
+    delete  rs.Url;
+
+}

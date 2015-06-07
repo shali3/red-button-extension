@@ -141,13 +141,12 @@ html, body {
   }
   table {
     width: 100%;
-    tr {
-      margin-bottom: 20px;
-      td:first-child {
-        padding: 5px 20px;
-        text-align: end;
-        width: 150px;
-      }
+    tr td:first-child {
+      padding: 5px 20px;
+      text-align: end;
+      width: 150px;
+      vertical-align: top;
+      font-weight: bold;
     }
   }
   .extra-message {
@@ -160,17 +159,30 @@ html, body {
     .screenshot {
       height: 50px;
       width: 70px;
-      margin: 0;
-
+      margin: -25px 0 0;
+      top: 50%;
       img {
         height: 50px;
       }
     }
-
-    .create-date, .report-id {
-      display: none;
+    table tr td {
+      line-height: 1.2em;
+      &:first-child {
+        padding: 0 10px;
+        text-align: start;
+        width: 120px;
+        font-weight: bold;
+      }
     }
+
   }
+
+  .report-status {
+    color: $header-red;
+    font-weight: bold;
+
+  }
+
 }
 
 .report-form {

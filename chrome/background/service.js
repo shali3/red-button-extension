@@ -6,6 +6,7 @@ var reports = require("./reports");
 console.log('initializing parse...');
 Parse.initialize("6xsxHmWNjN2FCi5cD8cimFmfPHZMWmEt4oWzaenH", "9IgABBu5yevvcjEsRVlg2GFVbKlr31KG9f3Q3uSS");
 exports.postReport = postReport;
+exports.getReportStatus = getReportStatus;
 function postReport(data, resolve, reject) {
     reports.canReport(function (canReport) {
         if (canReport) {
@@ -36,19 +37,33 @@ function postReport(data, resolve, reject) {
 }
 function getReportStatus(report, resolve, reject) {
     // StatusHandler.ashx (caseID=00XX code=passcode) [date, case number, staus body, url, reason for closing]
-    var data = {
-        caseID: report.reportID,
-        code: report.reportCode
-    };
-    $.ajax({
-        type: 'GET',
-        url: 'http://redbuttonproject.org/StatusHandler.ashx',
-        data: data,
-        success: function (response) {
-            resolve(response);
-        },
-        error: reject
-    });
+    if (report.reportCode) {
+        var data = {
+            caseID: report.reportID,
+            code: report.reportCode
+        };
+        $.ajax({
+            type: 'GET',
+            url: 'http://redbuttonproject.org/StatusHandler.ashx',
+            data: data,
+            success: function (response) {
+                resolve(response);
+            },
+            error: function (error) {
+                //TODO: fix this on the server side.
+                if (error.status === 200) {
+                    var response = JSON.parse(error.responseText.slice(1, error.responseText.length - 2))
+                    resolve(response);
+                }
+                else {
+                    reject(error)
+                }
+            }
+        });
+    }
+    else {
+        resolve(report);
+    }
 }
 
 

@@ -2,7 +2,7 @@ exports.saveReport = function (id, code, imageUrl) {
     var myReport = {
         reportID: id,
         reportCode: code,
-        imageUrl: imageUrl,
+        screenshot: imageUrl,
         time: new Date().getTime()
     };
     chrome.storage.local.get('reports', function (items) {

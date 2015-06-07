@@ -67,5 +67,7 @@ function sendError(id, error) {
 function handleHide(data, resolve) {
     button.state('window', {checked: false});
     panel.destroy();
-    resolve();
+    if (resolve) {
+        resolve();
+    }
 }

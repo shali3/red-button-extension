@@ -5,9 +5,13 @@
          ng-class="{closed:openedItem !== $index}"
          ng-click="$parent.openedItem = $index">
         <div class="screenshot">
-            <img ng-src="{{report.imageUrl}}" alt="Screenshot">
+            <img ng-src="{{report.screenshot}}" alt="Screenshot">
         </div>
         <table>
+            <tr class="status-mini" ng-hide="openedItem === $index">
+                <td>{{text.reportStatus}}</td>
+                <td><span class="report-status">{{report.status.Status}}</span></td>
+            </tr>
             <tr class="create-date">
                 <td>{{text.reportOpeningDate}}</td>
                 <td>{{report.time | date:'shortDate'}}</td>
@@ -16,11 +20,15 @@
                 <td>{{text.reportId}}</td>
                 <td>{{report.reportID}}</td>
             </tr>
-            <tr class="status">
+            <tr class="status" ng-show="openedItem === $index">
                 <td>{{text.reportStatus}}</td>
-                <td>{{report.status}}</td>
+                <td>
+                    <span class="report-status">{{report.status.Status}}</span>
+
+                    <p ng-show="report.status.PubStatus">{{report.status.PubStatus}}</p>
+                </td>
             </tr>
         </table>
-        <div class="extra-message">Some Extra Message</div>
+        <div class="extra-message" ng-show="openedItem === $index">{{report.status.SystemMessage}}</div>
     </div>
 </div>
