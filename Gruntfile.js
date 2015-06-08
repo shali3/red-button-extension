@@ -171,6 +171,12 @@ module.exports = function (grunt) {
                     'cfx xpi',
                     'wget --post-file=red-button.xpi http://localhost:8888/ || echo>/dev/null'
                 ].join('&&')
+            },
+            run: {
+                command: [
+                    'cd build/firefox',
+                    'cfx run'
+                ].join('&&')
             }
         },
         crx: {
@@ -293,6 +299,11 @@ module.exports = function (grunt) {
     grunt.registerTask('firefox:dev', [
         'firefox:build',
         'concurrent:firefox'
+    ]);
+
+    grunt.registerTask('firefox:run', [
+        'firefox:build',
+        'shell:run'
     ]);
 
     grunt.registerTask('firefox:build', [
