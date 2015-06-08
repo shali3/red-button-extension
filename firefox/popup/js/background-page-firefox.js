@@ -65,7 +65,7 @@ function backgroundPageFirefox($window, $rootScope, $q) {
                     deferred.resolve(response.data);
                 }
                 $rootScope.$apply();
-                delete defers[id];
+                delete defers[response.id];
             }
             else {
                 loaded = true;
