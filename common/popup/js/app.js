@@ -31,4 +31,17 @@ var app = angular.module('app', ['ui.bootstrap', 'ui.router', 'ngAudio'])
 
         fetchLocale($rootScope.locale);
         $rootScope.$watch('locale', fetchLocale);
+    })
+    .run(function ($rootScope, $location) {
+        window.ga = window.ga || function () {
+                (ga.q = ga.q || []).push(arguments)
+            };
+        ga.l = +new Date;
+        ga('create', 'UA-53536313-3', 'auto');  // Creates a tracker.
+        ga('set', 'checkProtocolTask', null);
+
+        $rootScope.$on('$stateChangeSuccess', function () {
+            ga('set', 'page', $location.path());
+            ga('send', 'pageview');
+        });
     });

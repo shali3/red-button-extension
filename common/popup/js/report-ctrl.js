@@ -12,6 +12,7 @@ function ReportCtrl($scope, $state, backgroundPage, ngAudio) {
     });
 
     $scope.sendReport = function () {
+        ga('send', 'event', 'sendReport', 'clicked');
         $scope.sendingReport = true;
         backgroundPage.sendReport($scope.reportData).then(function (response) {
                 //$scope.response = response;
