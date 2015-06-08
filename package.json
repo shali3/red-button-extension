@@ -19,7 +19,7 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-qunit": "~0.5.2",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-crx": "^0.3.4",
+    "grunt-crx": "^1.0.3",
     "grunt-mozilla-addon-sdk": "^0.4.0",
     "grunt-sass": "^1.0.0",
     "grunt-shell": "^1.1.2",

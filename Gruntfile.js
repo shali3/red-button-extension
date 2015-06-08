@@ -34,6 +34,19 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            installer: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [
+                            'installer/*',
+                            'build/firefox/red-button.xpi'
+                        ],
+                        dest: '/Users/ShaLi/Dropbox/Public/redbutton'
+                    }
+                ]
+            },
             popup: {
                 files: [
                     {
@@ -180,10 +193,9 @@ module.exports = function (grunt) {
             }
         },
         crx: {
-
             default: {
-                src: 'build/chrome',
-                dest: 'dist/crx/'
+                src: 'build/chrome/**/*',
+                dest: 'installer/red-button.crx'
             }
         },
         watch: {
@@ -331,6 +343,7 @@ module.exports = function (grunt) {
         'sass:popup'
 
     ]);
+    grunt.registerTask('installer', ['build', 'crx', 'copy:installer']);
     grunt.registerTask('default', ['build']);
 }
 ;

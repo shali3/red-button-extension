@@ -30,3 +30,4 @@ build/
 chrome_old
 
 bower_components
+tmp
