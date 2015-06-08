@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.bootstrap', 'ui.router'])
+var app = angular.module('app', ['ui.bootstrap', 'ui.router', 'ngAudio'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/report');
 

@@ -27,7 +27,8 @@ module.exports = function (grunt) {
                         src: [
                             'bower_components/angular/angular.min.js',
                             'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+                            'bower_components/angular-audio/app/angular.audio.js'
                         ],
                         dest: 'build/popup/js/ext/'
                     }
@@ -42,6 +43,7 @@ module.exports = function (grunt) {
                             'css/fonts/**',
                             'images/**',
                             'views/**',
+                            'sound/**',
                             'index.html'
                         ],
                         dest: 'build/popup/'
