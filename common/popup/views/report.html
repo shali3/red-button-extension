@@ -3,7 +3,15 @@
         <div ng-hide="error" class="capture-message">{{text.screenshotSuccess}}</div>
         <div dir="auto" ng-show="error" class="error-message"> {{error | error}}</div>
         <div class="screenshot">
-            <img ng-src="{{reportData.screenCaptureBase64png}}" alt="Screenshot">
+            <img ng-show="reportData.screenCaptureBase64png"
+                 ng-src="{{reportData.screenCaptureBase64png}}"
+                 alt="Screenshot">
+
+            <div ng-hide="reportData.screenCaptureBase64png" class="taking-screenshot">
+                <i class="fa fa-camera fa-4x"></i>
+
+                <p> {{text.takingScreenshot}} </p>
+            </div>
         </div>
         <div class="comment">
             <textarea class="form-control" type="text"

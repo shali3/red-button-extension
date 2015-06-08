@@ -14,7 +14,7 @@
              ng-class="{closed:openedItem !== $index}"
              ng-click="$parent.openedItem = $index">
             <div class="screenshot">
-                <img ng-src="{{report.screenshot}}" alt="Screenshot">
+                <img ng-show="report.screenshot" ng-src="{{report.screenshot}}" alt="Screenshot">
             </div>
             <table>
                 <tr class="status-mini" ng-hide="openedItem === $index">

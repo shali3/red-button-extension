@@ -22,5 +22,6 @@
   "reportStatus": "סטטוס",
   "loadingReportList": "טוען דיווחים",
   "failedLoadingReports": "אירעה שגיאה בקבלת הדיווחים",
-  "comingSoon": "בקרוב..."
+  "comingSoon": "בקרוב...",
+  "takingScreenshot": "מצלם תמונת מסך..."
 }

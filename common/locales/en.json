@@ -22,5 +22,6 @@
   "reportStatus": "Status",
   "loadingReportList": "Loading the latest report status",
   "failedLoadingReports": "Failed loading reports",
-  "comingSoon": "Coming soon..."
+  "comingSoon": "Coming soon...",
+  "takingScreenshot": "Taking a screenshot..."
 }
