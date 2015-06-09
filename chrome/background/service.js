@@ -6,7 +6,8 @@ var reports = require("./reports");
 console.log('initializing parse...');
 Parse.initialize("6xsxHmWNjN2FCi5cD8cimFmfPHZMWmEt4oWzaenH", "9IgABBu5yevvcjEsRVlg2GFVbKlr31KG9f3Q3uSS");
 exports.postReport = postReport;
-exports.getReportStatus = getReportStatus;
+exports.getReportsStatus = getReportsStatus;
+
 function postReport(data, resolve, reject) {
     reports.canReport(function (canReport) {
         if (canReport) {
@@ -34,22 +35,29 @@ function postReport(data, resolve, reject) {
         }
     });
 }
-function getReportStatus(report, resolve, reject) {
+function getReportsStatus(reports, resolve, reject) {
     // StatusHandler.ashx (caseID=00XX code=passcode) [date, case number, staus body, url, reason for closing]
-    if (report.reportCode) {
-        var data = {
-            caseID: report.reportID,
-            code: report.reportCode
-        };
+    var reportsParams = reports
+        .filter(function (report) {
+            return report.reportID && report.reportCode;
+        })
+        .map(function (report) {
+            return {reportID: report.reportID, reportCode: report.reportCode.toString()};
+        });
+
+    if (reportsParams.length > 0) {
         $.ajax({
-            type: 'GET',
-            url: 'http://redbuttonproject.org/StatusHandler.ashx',
-            data: data,
+            type: 'POST',
+            url: 'http://redbuttonproject.org/ReportStatusHandler.ashx',
+            processData: false,
+            //data: reportsParams,
+            data: JSON.stringify(reportsParams),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             success: function (response) {
                 resolve(response);
             },
             error: function (error) {
-                //TODO: fix this on the server side.
                 if (error.status === 200) {
                     var response = JSON.parse(error.responseText.slice(1, error.responseText.length - 2))
                     resolve(response);
@@ -61,7 +69,7 @@ function getReportStatus(report, resolve, reject) {
         });
     }
     else {
-        resolve(report);
+        resolve([]);
     }
 }
 

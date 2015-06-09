@@ -7,20 +7,22 @@ var reports = require('./reports');
 exports.postReport = service.postReport;
 exports.getReports = function (data, resolve, reject) {
     reports.getReports(function (reports) {
-        var count = 0;
-        reports.forEach(function (report) {
-            service.getReportStatus(report, function (res) {
-                if (report !== res) {
-                    cleanReportStatus(res);
-                    report.status = res;
-                    console.log(res);
-                }
-                count++;
-                if (count === reports.length) {
-                    resolve(reports);
-                }
-            }, reject);
-        });
+        service.getReportsStatus(reports, function (response) {
+            if (Array.isArray(response)) {
+                response.forEach(function (status) {
+                    reports.forEach(function (report) {
+                        if (report.reportID === status.CaseNumber) {
+                            cleanReportStatus(status);
+                            report.status = status;
+                        }
+                    });
+                });
+                resolve(reports);
+            }
+            else{
+                reject(response);
+            }
+        }, reject);
     });
 };
 
@@ -29,6 +31,5 @@ function cleanReportStatus(rs) {
     delete  rs.BodyLength;
     delete  rs.CaseNumber;
     delete  rs.ContentType;
-    delete  rs.Url;
 
 }

@@ -2,7 +2,7 @@ var reports = require("./reports");
 var Request = require("sdk/request").Request;
 
 exports.postReport = postReport;
-exports.getReportStatus = getReportStatus;
+exports.getReportsStatus = getReportsStatus;
 
 function postReport(data, resolve, reject) {
     if (reports.canReport()) {
@@ -12,7 +12,7 @@ function postReport(data, resolve, reject) {
                 data.code = Math.floor(Math.random() * 90000) + 10000;
             }
             Request({
-                url: "http://redbuttonproject.org/ReportHandler.ashx",
+                url: 'http://redbuttonproject.org/ReportHandler.ashx',
                 content: data,
                 onComplete: function (response) {
                     if (response.status == 200) {
@@ -33,30 +33,38 @@ function postReport(data, resolve, reject) {
     }
 }
 
-function getReportStatus(report, resolve, reject) {
+function getReportsStatus(reports, resolve, reject) {
     // StatusHandler.ashx (caseID=00XX code=passcode) [date, case number, staus body, url, reason for closing]
-    if (report.reportCode) {
-        var data = {
-            caseID: report.reportID,
-            code: report.reportCode
-        };
+    var reportsParams = reports
+        .filter(function (report) {
+            return report.reportID && report.reportCode;
+        })
+        .map(function (report) {
+            return {reportID: report.reportID, reportCode: report.reportCode.toString()};
+        });
+
+    if (reportsParams.length > 0) {
         Request({
-            url: 'http://redbuttonproject.org/StatusHandler.ashx',
-            content: data,
+            url: 'http://redbuttonproject.org/ReportStatusHandler.ashx',
+            content: JSON.stringify(reportsParams),
+            contentType: 'application/json',
             onComplete: function (response) {
-                if (response.status == 200) {
-                    var status = JSON.parse(response.text.slice(1, response.text.length - 2))
-                    resolve(status);
+                if (response.status == 200 && response.json) {
+                    resolve(response.json);
+                }
+                else if (response.status === 200) {
+                    var json = JSON.parse(response.text.slice(1, response.text.length - 2));
+                    resolve(json);
                 }
                 else {
                     var text = response.text ? response.status + ':' + response.text : response.status;
                     reject(text);
                 }
             }
-        }).get();
+        }).post();
     }
     else {
-        resolve(report);
+        resolve([]);
     }
 }
 
