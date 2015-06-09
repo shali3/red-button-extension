@@ -17,6 +17,13 @@ html, body {
   font-size: 14pt;
 }
 
+header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
 .header {
   font-family: $tzar-font;
   font-weight: 200;
@@ -32,6 +39,15 @@ html, body {
     font-weight: 100;
     font-size: 20pt;
   }
+}
+
+.main-view {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 126px;
+  bottom: 0;
+  overflow: auto;
 }
 
 .menu {
@@ -110,7 +126,6 @@ html, body {
 .my-reports {
   padding: 20px 5px;
   background-color: $reports-bg-color;
-
 
   .reports-loading {
     text-align: center;
@@ -222,7 +237,7 @@ html, body {
       max-width: 100%;
     }
   }
-  .taking-screenshot{
+  .taking-screenshot {
     padding-top: 25px;
   }
   .comment {
