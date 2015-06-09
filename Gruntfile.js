@@ -248,7 +248,7 @@ module.exports = function (grunt) {
             var pkg = grunt.file.readJSON('package.json');
             var chrome = grunt.file.readJSON('chrome/manifest.json');
             var firefox = grunt.file.readJSON('firefox/package.json');
-            var fields = ['version'];
+            var fields = ['version', 'author'];
             for (var i = 0; i < fields.length; i++) {
                 var field = fields[i];
                 chrome[field] = firefox[field] = pkg[field];
