@@ -22,7 +22,7 @@
                 class="close"
                 tooltip-placement="{{text.start}}"
                 tooltip="{{text.close}}"
-                ng-click="close()"
+                ng-click="closePopup()"
                 aria-label="{{text.close}}">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -41,5 +41,26 @@
     </div>
 </header>
 <ui-view class="main-view"></ui-view>
+<div class="modal-bg in" ng-show="successModal || generalError"></div>
+<div class="modal success-modal" ng-show="successModal">
+    {{text.dearUser}}
+    <h2>{{text.reportSuccessMessage}}</h2>
+    <a class="my-reports-link" ui-sref="myReports" ng-click="successModal=false">{{text.trackReportAction}}</a>
+    <button class="close-btn" ng-click="closePopup()">{{text.close}}</button>
+</div>
+<div ng-show="generalError" class="modal error-modal">
+    <button type="button"
+            class="close"
+            ng-click="generalError = null"
+            aria-label="{{text.close}}">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="error-modal-content">
+        <i class="fa fa-exclamation-circle fa-5x"></i>
+
+        <h2>{{text.failedSendingReport}}</h2>
+        {{generalError | error}}
+    </div>
+</div>
 </body>
 </html>

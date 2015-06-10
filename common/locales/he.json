@@ -22,6 +22,9 @@
   "reportStatus": "סטטוס",
   "loadingReportList": "טוען דיווחים",
   "failedLoadingReports": "אירעה שגיאה בקבלת הדיווחים",
+  "failedSendingReport": "אירעה שגיאה בשליחת הדיווח",
   "comingSoon": "בקרוב...",
-  "takingScreenshot": "מצלם תמונת מסך..."
+  "takingScreenshot": "מצלם תמונת מסך...",
+  "dearUser": "משתמש יקר",
+  "trackReportAction": "עקוב אחר הדיווח"
 }

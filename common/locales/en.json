@@ -22,6 +22,9 @@
   "reportStatus": "Status",
   "loadingReportList": "Loading the latest report status",
   "failedLoadingReports": "Failed loading reports",
+  "failedSendingReport": "Error Sending Report",
   "comingSoon": "Coming soon...",
-  "takingScreenshot": "Taking a screenshot..."
+  "takingScreenshot": "Taking a screenshot...",
+  "dearUser": "Dear user",
+  "trackReportAction": "Track your report"
 }

@@ -133,6 +133,14 @@ header {
       color: $header-red
     }
   }
+  .no-reports {
+    text-align: center;
+  }
+  .error-message {
+    text-align: center;
+    color: $header-red;
+  }
+
 }
 
 .report-item {
@@ -215,10 +223,6 @@ header {
 
 }
 
-.error-message {
-  color: $header-red;
-}
-
 .coming-soon {
   text-align: center;
 }
@@ -265,4 +269,76 @@ header {
     margin: 10px;
   }
 
+}
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $active-tab-background;
+  z-index: 100;
+  &.in {
+    opacity: 0.9;
+  }
+}
+
+.modal {
+  z-index: 110;
+  display: block;
+}
+
+.error-modal-content {
+  text-align: center;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 180px;
+}
+
+.error-modal {
+  color: #ffffff;
+  font-size: 14pt;
+  .close {
+    color: white;
+    opacity: 1;
+    font-weight: 100;
+    font-size: 80px;
+    margin: -20px 10px 0;
+  }
+}
+
+.success-modal {
+  font-weight: 100;
+  color: #ffffff;
+  font-size: 16pt;
+  padding-top: 205px;
+  text-align: center;
+
+  .my-reports-link {
+    margin-top: 20px;
+    &, &:hover, &:active, &:visited {
+      color: #ffffff;
+    }
+  }
+  .close-btn {
+    $size: 90px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 47px;
+    font-family: $tzar-font;
+    font-weight: 200;
+    font-size: 22pt;
+    border: none;
+    display: block;
+    margin: auto;
+    color: $active-tab-background;
+    background-color: #ffffff;
+    height: $size;
+    width: $size;
+    line-height: $size;
+    border-radius: 50%;
+  }
 }

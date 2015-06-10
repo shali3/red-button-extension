@@ -1,4 +1,4 @@
-function ReportCtrl($scope, $state, backgroundPage, ngAudio) {
+function ReportCtrl($scope, $rootScope, backgroundPage, ngAudio) {
 
     $scope.sendingReport = false;
     $scope.reportData = {};
@@ -15,11 +15,11 @@ function ReportCtrl($scope, $state, backgroundPage, ngAudio) {
         ga('send', 'event', 'sendReport', 'clicked');
         $scope.sendingReport = true;
         backgroundPage.sendReport($scope.reportData).then(function (response) {
-                //$scope.response = response;
-                $state.go('myReports');
+                $scope.response = response;
+                $rootScope.successModal = true;
             },
             function (error) {
-                $scope.error = error;
+                $rootScope.generalError = error;
             }).finally(function () {
                 $scope.sendingReport = false;
             });
