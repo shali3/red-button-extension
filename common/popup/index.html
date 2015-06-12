@@ -27,8 +27,10 @@
             <span aria-hidden="true">&times;</span>
         </button>
 
-        <img class="locale-btn pull-right" ng-hide="locale === 'en'" ng-click="setLocale('en')" src="images/usa.png">
-        <img class="locale-btn pull-left" ng-hide="locale === 'he'" ng-click="setLocale('he')" src="images/israel.png">
+        <div class="locale-container">
+            <div class="locale-btn pull-right" ng-hide="locale === 'en'" ng-click="setLocale('en')">EN</div>
+            <div class="locale-btn pull-left" ng-hide="locale === 'he'" ng-click="setLocale('he')">HE</div>
+        </div>
     </div>
     <div class="menu clearfix">
         <div class="menu-item col-xs-4"

@@ -31,7 +31,7 @@ header {
   padding: 5px;
   background-color: $header-red;
   color: white;
-  line-height: 30px;
+  line-height: 35px;
   height: 40px;
   .close {
     color: white;
@@ -48,6 +48,17 @@ header {
   top: 126px;
   bottom: 0;
   overflow: auto;
+}
+
+.locale-container{
+  position: absolute;
+  top: 4px;
+  left: 7px;
+  right: 7px;
+  font-size: 16pt;
+}
+.locale-btn {
+  cursor: pointer;
 }
 
 .menu {
