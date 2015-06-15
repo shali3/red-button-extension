@@ -12,7 +12,7 @@ function ReportCtrl($scope, $rootScope, backgroundPage, ngAudio) {
     });
 
     $scope.sendReport = function () {
-        ga('send', 'event', 'sendReport', 'clicked');
+        Parse.Analytics.track('sendReport', {withMessage: $scope.reportData.comment ? true : false});
         $scope.sendingReport = true;
         backgroundPage.sendReport($scope.reportData).then(function (response) {
                 $scope.response = response;
